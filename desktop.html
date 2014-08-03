@@ -33,7 +33,7 @@
             <div class="footer-title">Players...</div>
             
           </div>
-          <button id="start" class="nextbutton" disabled="true" >Start</button>
+          <button id="start" class="nextbutton start start-disabled" disabled="true" >Start</button>
         </div>
         <div class="players"></div>
         </div>
@@ -50,7 +50,7 @@
                 <div class="footer-title">Waiting for...</div>
                 <div class="players"></div>
             </div>
-            <button id="next" class="nextbutton" onclick="$.mobile.changePage('#reveal')">Next</button>
+            <button id="next" class="nextbutton disabled" onclick="getFinalStateAPI();">Next</button>
         </div>
 
         <script async="true" src="http://assets.bop.fm/embed.js"></script>
@@ -84,7 +84,7 @@
         <div class="footer-main">
             <!-- <div class="footer-title">Players...</div> -->
             <div class="footer-players">
-                <div style="float:left;">
+                <div style="float:left;" id="answer-right">
                     <div class="footer-title" style="color: green;">Right...</div>
                     <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
@@ -97,11 +97,11 @@
                 </div>
 
                 <div style="float:right;">
-                    <button id="endgame" class="nextbutton" onclick="$.mobile.changePage('#scoreboard')">End Game</button><br>
+                    <!-- <button id="endgame" class="nextbutton" onclick="$.mobile.changePage('#scoreboard')">End Game</button><br> -->
                     <button id="newgame" class="nextbutton" onclick="$.mobile.changePage('#lobby')">New Game</button>
                 </div>
 
-                <div>
+                <div id="answer-wrong">
                     <div class="footer-title" style="color: red;">Wrong...</div>
                     <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
@@ -116,35 +116,6 @@
 
         </div>
 
-    </div>
-
-    <div data-role="page" id="scoreboard" class="container">
-        <div class="jumbotron scoreboard">
-            <p class="text prompt">Scoreboard</p>
-
-            <button class="footer-newgame" style="width:150px;" onclick="$.mobile.changePage('#lobby')">New Game</button>
-
-            <div id="scoreboard-winners">
-                <div class="scorecard">
-                    <div class="user-name">Sasi</div>
-                    <div>
-                        <img src="image/user.jpg" class="user-thumbnail">
-                        <p class="user-score">100</p>
-                    </div>
-                </div>
-                <br>
-                <div class="scorecard">
-                    <div class="user-name">Sasi</div>
-                    <div>
-                        <img src="image/user.jpg" class="user-thumbnail">
-                        <p class="user-score">57</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-main">
-        </div>
     </div>
 
     <div data-role="page" id="hiddden">
@@ -190,8 +161,10 @@
         num_song_choices++;
         if (num_song_choices == MAX_PLAYERS) {
             $('#start').attr("disabled", false);
+            $('#start').removeClass("start-disabled");
         } else {
             $('#start').attr("disabled", true);
+            $('#start').addClass("start-disabled");
         }
     });
 
@@ -238,9 +211,36 @@
     function songToPlayCallback(error, data) {
         console.log("Song To Play Error: " + JSON.stringify(error));
         console.log("Song To Play Response: " + JSON.stringify(data));
-        Bop.playSong('lil jon', 'turn down for what');
+        Bop.playSong(data.artist, data.title);
 
         // Bop.playSong('lil jon', 'turn down for what');
+    }
+
+    function getFinalStateAPI() {
+        getFinalState(getFinalStateCallback);
+    }
+
+    function getFinalStateCallback(error, data) {
+        console.log("Final State Error: " + JSON.stringify(error));
+        console.log("Final State Response: " + JSON.stringify(data));
+
+        var rightDiv = $('#answer-right');
+        var wrongDiv = $('#answer-wrong');
+
+        for ( var i = 0; i < data.length; i++ ) {
+            console.log("Getting data " + i );
+            var cardDiv = $("<div class='card card-option card-footer'></div>");
+            var imgDiv = $("<img src='"+data[i].image.replace("_normal", "")+"' class='user-thumbnail'/>");
+            var nameDiv = $("<div class='user-name'>"+data[i].name.split(' ')[0]+"</div>");
+            cardDiv.append(imgDiv).append(nameDiv);
+            if ( data[i].correct ) {
+                rightDiv.append(cardDiv);
+            } else {
+                leftDiv.append(cardDiv);
+            }
+        }
+
+        $.mobile.changePage('#reveal');
     }
 
     $('#start').click(function() {
