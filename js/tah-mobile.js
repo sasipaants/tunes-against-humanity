@@ -23,14 +23,25 @@ function getPlayersCallback(error, data) {
 	//console.log("Players Response: " + JSON.stringify(data));	
 }
 
+
 function selectSongAPI(song) {
 	// call selectSong(title, artist, twitterId);
 	$.mobile.changePage( '#waiting', { transition: 'slide'} );
 
 }
 
+//User picks which song goes with the prompt
 function selectSong(title, artist, twitterId) {
+	submitSong(twitterId, title, artist, function(error) {
+		console.log(error);
+	});
+}
 
+//User votes on which other user picked that song
+function voteOnUser(twitterId, votedUserId) {
+	submitVote(twitterId, votedUserId, function(error) {
+		console.log(error);
+	});
 }
 
 function saveUser(twitter) {
