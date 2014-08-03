@@ -53,15 +53,19 @@ function submitSong(userId, song, artist, callback) {
   }); 
 }
 
-function submitVote(userId, votedUserId, callback) {
-  
+function submitVote(userId, votedUserId, votedUserImage, votedUserName, callback) {
+  var votedUser = {
+      "image": votedUserImage,
+      "name": votedUserName,
+      "id": votedUserId
+  };
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
   var root = new Firebase(FIREBASE_URL);
   var currentGameRef = root.child("games").limit(1);
   currentGameRef.once('child_added', function(snapshot) {
     var answersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers");
-    answersRef.child(userId).set(votedUserId, function(error) {
-      callback(error, votedUserId);
+    answersRef.child(userId).set(votedUser, function(error) {
+      callback(error, votedUser);
     });
   }); 
 }
@@ -98,12 +102,28 @@ function getFinalState(callback) {
   });
 }
 
+//Get your answer for final page on mobile
+function  getMyAnswer(twitterId, callback) {
+    var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+    var root = new Firebase(FIREBASE_URL);
+    var currentGameRef = root.child("games").limit(1);
+    currentGameRef.once('child_added', function(snapshot) {
+      console.log("Getting answer for game " + (snapshot.name()) + " for user " + twitterId);
+      var choicesRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers/" + twitterId);
+        choicesRef.once('value', function(snapshot) {
+        console.log(snapshot.val());
+        callback(null, snapshot.val());
+      });
+    });
+}
+
 /*
 getFinalState(function(error, game) {
   console.log(game);
 });
 */
-//Get correct answer for prompt
+//Get correct answer for prompt on desktop
+
 
 //Get game over -  is number of answers == number of players
 

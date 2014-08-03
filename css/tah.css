@@ -26,6 +26,7 @@ h1 {
 
 .card-option-vote {
 	width: 110px;
+	cursor: pointer;
 }
 
 .card-answer {

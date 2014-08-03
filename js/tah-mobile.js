@@ -2,6 +2,8 @@ $( document ).ready(function() {
 	// getSongsAPI();
 	getPlayersAPI();
 
+	
+
 });
 function getSongsAPI() {
 	getSongs(getSongsCallback);
@@ -27,15 +29,6 @@ function getSongsCallback(error, data) {
 
 	}
 	$.mobile.changePage("#prompt");
-	
-// <li class="list-music-item">
-// 	<div class="song-title"> Turn Down For What</div>
-// 	​<div class="song-artist">Lil Jon</div>
-// 	<div class="controls btn-plays">
-// 		<a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
-// 		<a href="#" onclick="Bop.pause();" class="ui-btn ui-btn-inline">&#8214;</a>
-// 	</div>
-// </li>
 }
 
 function getPlayersAPI() {
@@ -50,19 +43,12 @@ function getPlayersCallback(error, data) {
 
 	for ( var i = 0; i < data.length; i++ ) {
 		console.log("Getting data " + i );
-		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI("+loggedInUser.id+",\""+data[i].id+"\")'></div>");
+		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI("+loggedInUser.id+",\""+data[i].id+"\",\""+data[i].image+"\",\""+data[i].name+"\")'></div>");
 		var imgDiv = $("<img src='"+data[i].image.replace("_normal", "")+"' class='user-thumbnail'/>");
 		var nameDiv = $("<div class='user-name'>"+data[i].name.split(' ')[0]+"</div>");
 		cardDiv.append(imgDiv).append(nameDiv);
 		listMusic.append(cardDiv);
 	}
-
-
-
-// <div class="card card-option card-option-vote">
-// 	<img src="image/user.jpg" class="user-thumbnail">
-// 	<div class="user-name">Sasi</div>
-// </div>
 }
 
 
@@ -78,15 +64,32 @@ function selectSongCallback(error, data) {
 }
 
 //User votes on which other user picked that song
-function voteOnUserAPI(twitterId, votedUserId) {
-	submitVote(twitterId, votedUserId, voteOnUserCallback);
+function voteOnUserAPI(twitterId, votedUserId, votedUserImage, votedUserName) {
+	submitVote(twitterId, votedUserId, votedUserImage, votedUserName, voteOnUserCallback);
 }
 
 function voteOnUserCallback(error, data) {
 	console.log("Vote Error: " + JSON.stringify(error));
 	console.log("Vote Response: " + JSON.stringify(data));	
+	getMyAnswerAPI(loggedInUser.id);
 	$.mobile.changePage( '#answer', { transition: 'slide'} );
 }
+
+function getMyAnswerAPI(twitterId) {
+	getMyAnswer(twitterId, getMyAnswerCallback);
+}
+
+function getMyAnswerCallback(error, data) {
+	console.log("My Answer Error: " + JSON.stringify(error));
+	console.log("My Answer Response: " + JSON.stringify(data));	
+	var answerDiv = $("#answer-content");
+	var imgDiv = $("<img src='"+data.image.replace("_normal", "")+"' class='user-thumbnail'>");
+	var nameDiv = $("<div class='user-name'>"+data.name.split(' ')[0]+"</div>");
+	answerDiv.append(imgDiv).append(nameDiv);
+	// <img src="image/user.jpg" class="user-thumbnail">
+	// <div class="user-name">Sasi</div>
+}
+
 
 function saveUser(twitter) {
 
