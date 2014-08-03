@@ -53,7 +53,7 @@ function getSongs(callback) {
 
 //Get List of Players
 function getPlayers(callback) {
-  usersRef.on('value', function(snapshot) {
+  playersRef.on('value', function(snapshot) {
     callback(null, snapshot.val());
   }, function(errorObject) {
     callback(errorObject.code);
