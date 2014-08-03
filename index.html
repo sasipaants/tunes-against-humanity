@@ -53,6 +53,10 @@
                }
             );
         });
+
+        function guessing() {
+            $.mobile.changePage("#guess");
+        }
 	    //alert("test done");
   	</script>
 </head>
@@ -84,16 +88,16 @@
                     <div class="controls"><a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
                     <a href="#" onclick="Bop.pause();" class="ui-btn ui-btn-inline">&#8214;</a></div>
         			<div class="song-title">
-                        Turn Down For What
+                        <a href="#guess"> Turn Down For What</a>
         			</div>
         			​<div class="song-artist">
                         Lil Jon
     				</div>
-                    <div class="controls"><a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
-                    <a href="#" onclick="Bop.pause();" class="ui-btn ui-btn-inline">&#8214;</a></div>
         		</li>
         		<li class="list-music-item">
-        			<div class="song-title">Turn Down For What</div>
+                    <div class="controls"><a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
+                    <a href="#" onclick="Bop.pause();" class="ui-btn ui-btn-inline">&#8214;</a></div>
+        			<div class="song-title"> <a href="#guess">Turn Down For What </a></div>
         			​<div class="song-artist">Lil Jon</div>
         		</li>
     		</ul>
