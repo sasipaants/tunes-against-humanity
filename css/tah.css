@@ -3,13 +3,36 @@ h1 {
 	margin: 0px;
 }
 
+.card {
+	border: 1px solid black;
+	box-shadow: 3px 3px 5px #888888;
+	border-radius: 5px;
+	padding: 10px;
+	width: 45%;
+	height: 200px; 
+
+}
+
+.card-wrapper {
+	height: 650px;
+	padding: 15px;
+}
+
 .footer {
 	position: absolute;
-	bottom: 5px;
+	bottom: 1em;
+	width: 100%;
+	text-align: center;
+}
+
+.footer-waiting {
+	bottom: 85px;
+	margin-left: -20px;;
 }
 
 .logo {
 	width: 50px;
+	padding-right: 5px;
 }
 
 .twitter {
@@ -20,6 +43,7 @@ h1 {
 
 #twitter-login {
 	cursor: pointer;
+	padding-right: 25px;
 }
 
 #list-music {
@@ -29,16 +53,23 @@ h1 {
 }
 
 .list-music-item {
-
 	border-bottom: 1px solid black;
+}
+
+.page-content {
+	padding: 1em;
 }
 
 
 .song-artist {
 	font-size: 16px;
-	/*margin-top: -20px;	*/
+	margin-top: -40px;	
+	padding: 10px;
 }
 
 .song-title {
 	font-size: 25px;
+	padding: 10px;
+	line-height: 30px;
+	text-transform: uppercase;
 }
