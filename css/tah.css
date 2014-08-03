@@ -14,4 +14,10 @@ h1 {
 
 .twitter {
 	right: 5px;
+	bottom: 5px;
+	position: absolute;
+}
+
+#twitter-login {
+	cursor: pointer;
 }
