@@ -77,7 +77,7 @@ function voteOnUserCallback(error, data) {
 	console.log("Result is " +JSON.stringify(data));
 	var answerDiv = $('#result');
 	var resultHTML;
-	if (data) {
+	if (data.correct) {
 		resultHTML = $('<div class="correct">Correct!</div>');
 	} else {
 		resultHTML = $('<div class="correct">Wrong!</div>');
