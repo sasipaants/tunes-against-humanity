@@ -19,7 +19,10 @@
   	<script>
 	    var isNewUser = true;
 	    var myFirebaseRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
-	    var auth = new FirebaseSimpleLogin(myFirebaseRef, function(error, user) {
+        var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+        var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
+        
+        var auth = new FirebaseSimpleLogin(myFirebaseRef, function(error, user) {
 	        if (error) {
 	            // an error occurred while attempting login
 	            console.log(error);
@@ -29,18 +32,27 @@
 	                id = user.id;
 	                myFirebaseRef.child(user.uid).set(user);
 	            }
+                currentGameRef.once('child_added', function(snapshot) {
+                    //var playersRef = currentGameRef.child(snapshot.name()).child("players");
+                    var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
+                    playersRef.child(user.id).set({
+                        "image": user.thirdPartyUserData.profile_image_url_https,
+                        "name": user.displayName
+                    });
+                });
 	        } else {
 	            // user is logged out
 	        }
-	    });
-	    $(function() {
-	        $("#login").click( function()
-	           {
-	             auth.login('twitter');
-	             $('#login').hide();
-	           }
-	        );
-	    });
+        });
+
+        $(function() {
+            $("#login").click( function()
+               {
+                 auth.login('twitter');
+                 $('#login').hide();
+               }
+            );
+        });
 	    //alert("test done");
   	</script>
 </head>
