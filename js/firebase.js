@@ -182,7 +182,7 @@ function startGuessing() {
     var root = new Firebase(FIREBASE_URL);
     var currentGameRef = root.child("games").limit(1);
     var num_song_choices = 0;
-    var MAX_PLAYERS = 4;
+    var MAX_PLAYERS = 2;
     currentGameRef.once('child_added', function(snapshot) {
       var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
 

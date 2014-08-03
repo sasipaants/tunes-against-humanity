@@ -33,7 +33,7 @@
             <div class="footer-title">Players...</div>
             
           </div>
-          <button id="start" class="nextbutton start start-disabled" disabled="true" >Start</button>
+          <button id="start" class="nextbutton start btn-disabled" disabled="true" >Start</button>
         </div>
         <div class="players"></div>
         </div>
@@ -50,7 +50,7 @@
                 <div class="footer-title">Waiting for...</div>
                 <div class="players"></div>
             </div>
-            <button id="next" class="nextbutton disabled" onclick="getFinalStateAPI();">Next</button>
+            <button id="next" class="nextbutton btn-disabled" onclick="getFinalStateAPI();">Next</button>
         </div>
 
         <script async="true" src="http://assets.bop.fm/embed.js"></script>
@@ -132,7 +132,7 @@
     var prompt;
     var num_song_choices = 0;
     var num_players = 0;
-    var MAX_PLAYERS = 4;
+    var MAX_PLAYERS = 2;
 
     var data = {
       "questions": {
