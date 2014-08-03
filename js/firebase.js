@@ -10,7 +10,7 @@ function getSongs(callback) {
     _.each(snapshot.val(), function(song) {
       songsArray.push(song);
     });
-    callback(null, _.sample(songsArray, 10);
+    callback(null, _.sample(songsArray, 10));
   }, function (errorObject) {
     callback(errorObject.code);
   });
