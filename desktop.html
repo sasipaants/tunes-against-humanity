@@ -37,10 +37,46 @@
     </div>
 
   <script type="text/javascript">
+    var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
     var usersRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
     var promptRef = new Firebase("https://vivid-fire-183.firebaseio.com/prompts");
+    var gamesRef = new Firebase(FIREBASE_URL + "games");
+
+    var data = {
+      "questions": {
+        "question1": {
+          "text": "What song does Paul Graham listen to in the shower"
+        } 
+      },
+      "players": {
+        "user1": {
+          "image": "http://www.scarymommy.com/wp-content/uploads/2013/01/531221_8d837de67576fe7e80207347163fb737_large.jpg",
+          "name": "Jimmy Jacobson",
+        },
+        "user2": {
+          "image": "http://i.imgur.com/xycC5j1.jpg",
+          "name": "Lita Cho"
+        }
+      }
+    };
+
+    var newGame = gamesRef.push(data);
+
+    var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
+
+    currentGameRef.once('child_added', function(snapshot) {
+      displayPrompt(snapshot);
+    }, function(error) {
+      //oops
+      console.log(error);
+    });
+
+    var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
+
+    playersRef.on('child_added', displayUsers);
 
     function displayPrompt(snapshot) {
+      /*
         var i = 0;
         var rand = Math.floor(Math.random() * snapshot.numChildren());
         var prompt;
@@ -50,29 +86,27 @@
             }
             i++;
         });
+        */
+        var prompt = snapshot.val().questions.question1.text;
         $('#prompt').append('<p class="text">' + prompt + '</p>');
         $('html').trigger('create');
     }
 
     function displayUsers (snapshot) {
+        console.log(snapshot.val());
         var user = snapshot.val();
-        var user_pic = user.thirdPartyUserData.profile_image_url_https;
-        if (user.active) {
-            var img = $('<img class="user_img">');
-            img.attr('src', user_pic);
-            img.appendTo('#imagediv');
-            $('#imagediv').append('<p class="text">' + user.displayName + '</p>');
-            $('html').trigger('create');
-        }
+        var user_pic = user.image;
+        var img = $('<img class="user_img">');
+        img.attr('src', user_pic);
+        img.appendTo('#imagediv');
+        $('#imagediv').append('<p class="text">' + user.name + '</p>');
+        $('html').trigger('create');
     }
 
     $('#start').click(function() {
         $.mobile.changePage('#music')
     });
 
-    usersRef.on('child_added', displayUsers);
-    usersRef.on('child_changed', displayUsers);
-    promptRef.on('value', displayPrompt);
   </script>
   </body>
 </html>
