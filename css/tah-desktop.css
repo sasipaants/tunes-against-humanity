@@ -25,14 +25,24 @@ body {
 	padding-left: 55px;
 }
 
-#start {
+.start {
 	color: black;
 	background-color: #ffcc00;
-	width: 100px;
+	width: 100px !important;
 	float: right;
 	border-radius: 6px;
 	border: none;
 	font-size: 20px;
+}
+
+.btn-disabled {
+    /*color: black;*/
+    background-color: grey;
+    width: 100px !important;
+    /*float: right;*/
+    /*border-radius: 6px;*/
+    /*border: none;*/
+    /*font-size: 20px;*/
 }
 
 #next {

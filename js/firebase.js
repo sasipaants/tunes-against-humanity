@@ -193,12 +193,24 @@ function startGuessing() {
           user = snapshot.val();
           num_song_choices++;
           if (num_song_choices == MAX_PLAYERS) {
-              $('#btn-play').attr("disabled", false);
+              // $('#btn-play').attr("disabled", false);
+              getPlayersAPI();
           } else {
-              $('#btn-play').attr("disabled", true);
+              // $('#btn-play').attr("disabled", true);
           }
       });
   });
+}
+
+function waitForNextRound() {
+    console.log("Waiting for next round...");
+    var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+    var root = new Firebase(FIREBASE_URL);
+    var currentGameRef = root.child("games");
+    currentGameRef.once('child_added', function(snapshot) {
+        console.log("Next round starting.");
+        //window.location = 'index.html';
+    });
 }
 
 //Get correct answer for prompt on desktop
