@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 	getSongsAPI();
 	// getPlayersAPI();
+
 });
 function getSongsAPI() {
 	getSongs(getSongsCallback);
@@ -42,7 +43,7 @@ function getPlayersAPI() {
 
 function getPlayersCallback(error, data) {
 	console.log("Players Error: " + JSON.stringify(error));
-	console.log("Players Response: " + JSON.stringify(data));	
+	//console.log("Players Response: " + JSON.stringify(data));	
 }
 
 function selectSongAPI(song) {
