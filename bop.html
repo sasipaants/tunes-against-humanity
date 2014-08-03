@@ -1,0 +1,629 @@
+<html>
+<head>
+    <title>Bop Player testbed</title>
+    <style>
+        .bop-player {
+            padding: 20px;
+            width: 400px;
+            background: #EEE;
+        }
+    </style>
+	
+	<script>
+		var songid = 0;
+		var songs = [
+  {
+    "title":"​TURN DOWN FOR WHAT",
+    "artist":"LIL JON",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​792/​0003479298_50.jpg"
+  },
+  {
+    "title":"​CRAZY STUPID LOVE",
+    "artist":"​CHERYL COLE FT TINIE TEMPAH",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​036/​263/​0003626347_50.jpg"
+  },
+  {
+    "title":"​RUDE",
+    "artist":"​MAGIC",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​284/​0003028406_50.jpg"
+  },
+  {
+    "title":"​GHOST",
+    "artist":"​ELLA HENDERSON",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​974/​0003497457_50.jpg"
+  },
+  {
+    "title":"​BUDAPEST",
+    "artist":"​GEORGE EZRA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​328/​0003432820_50.jpg"
+  },
+  {
+    "title":"​PROBLEM",
+    "artist":"​ARIANA GRANDE FT IGGY AZALEA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​599/​0003459962_50.jpg"
+  },
+  {
+    "title":"​BOOM CLAP",
+    "artist":"​CHARLI XCX",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​911/​0003591116_50.jpg"
+  },
+  {
+    "title":"​IT'S MY BIRTHDAY",
+    "artist":"​WILL I AM FT CODY WISE",
+    "image":"http:​/​/​c0903002.cdn.cloudfiles.rackspacecloud.com/​10702-william_its_my_birthday.jpg"
+  },
+  {
+    "title":"​ME AND MY BROKEN HEART",
+    "artist":"​RIXTON",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​033/​382/​0003338203_50.jpg"
+  },
+  {
+    "title":"​RIGHT HERE",
+    "artist":"​JESS GLYNNE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​036/​281/​0003628180_50.jpg"
+  },
+  {
+    "title":"​SING",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​c0903002.cdn.cloudfiles.rackspacecloud.com/​10604-dj.sagclawj.60x60-50.jpg"
+  },
+  {
+    "title":"​WAVES",
+    "artist":"​MR PROBZ",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​032/​018/​0003201847_50.jpg"
+  },
+  {
+    "title":"​ALWAYS",
+    "artist":"​MK FT ALANA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​036/​363/​0003636382_50.jpg"
+  },
+  {
+    "title":"​STAY WITH ME",
+    "artist":"​SAM SMITH",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​702/​0003470287_50.jpg"
+  },
+  {
+    "title":"​LOUDER",
+    "artist":"​NEON JUNGLE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​006/​0003500608_50.jpg"
+  },
+  {
+    "title":"​GECKO (OVERDRIVE)",
+    "artist":"​OLIVER HELDENS & BECKY HILL",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​661/​0003566139_50.jpg"
+  },
+  {
+    "title":"​CHANDELIER",
+    "artist":"​SIA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​327/​0003432748_50.jpg"
+  },
+  {
+    "title":"​YOUR LOVE",
+    "artist":"​NICOLE SCHERZINGER",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​039/​0003503978_50.jpg"
+  },
+  {
+    "title":"​JUNGLE",
+    "artist":"​X AMBASSADORS / JAMIE N COMMONS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​599/​0003459963_50.jpg"
+  },
+  {
+    "title":"​SOMEBODY TO YOU",
+    "artist":"​VAMPS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​318/​0003431800_50.jpg"
+  },
+  {
+    "title":"​ALL OF ME",
+    "artist":"​JOHN LEGEND",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​033/​198/​0003319882_50.jpg"
+  },
+  {
+    "title":"​A SKY FULL OF STARS",
+    "artist":"​COLDPLAY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​036/​037/​0003603727_50.jpg"
+  },
+  {
+    "title":"​HAPPY",
+    "artist":"​PHARRELL WILLIAMS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​031/​577/​0003157769_50.jpg"
+  },
+  {
+    "title":"​SUMMER",
+    "artist":"​CALVIN HARRIS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​817/​0003581749_50.jpg"
+  },
+  {
+    "title":"​FANCY",
+    "artist":"​IGGY AZALEA FT CHARLI XCX",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​317/​0003431791_50.jpg"
+  },
+  {
+    "title":"​DANGEROUS LOVE",
+    "artist":"​FUSE ODG FT SEAN PAUL",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​874/​0003487460_50.jpg"
+  },
+  {
+    "title":"​WIGGLE",
+    "artist":"​JASON DERULO FT SNOOP DOGG",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​301/​0003430138_50.jpg"
+  },
+  {
+    "title":"​LET IT GO",
+    "artist":"​IDINA MENZEL",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​864/​0003086430_50.jpg"
+  },
+  {
+    "title":"​THINKING OUT LOUD",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​830/​0003583012_50.jpg"
+  },
+  {
+    "title":"​RATHER BE",
+    "artist":"​CLEAN BANDIT FT JESS GLYNNE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​031/​919/​0003191984_50.jpg"
+  },
+  {
+    "title":"​WASTED",
+    "artist":"​TIESTO FT MATTHEW KOMA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​583/​0003458375_50.jpg"
+  },
+  {
+    "title":"​I WILL NEVER LET YOU DOWN",
+    "artist":"​RITA ORA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​126/​0003412625_50.jpg"
+  },
+  {
+    "title":"​ONLY LOVE CAN HURT LIKE THIS",
+    "artist":"​PALOMA FAITH",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​640/​0003464053_50.jpg"
+  },
+  {
+    "title":"​STOLEN DANCE",
+    "artist":"​MILKY CHANCE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​064/​0003506476_50.jpg"
+  },
+  {
+    "title":"​IF I GO",
+    "artist":"​ELLA EYRE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​145/​0003514528_50.jpg"
+  },
+  {
+    "title":"​DON'T STOP",
+    "artist":"​5 SECONDS OF SUMMER",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​858/​0003585882_50.jpg"
+  },
+  {
+    "title":"​CLASSIC",
+    "artist":"​MKTO",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​028/​090/​0002809036_50.jpg"
+  },
+  {
+    "title":"​HIDEAWAY",
+    "artist":"​KIESZA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​192/​0003419259_50.jpg"
+  },
+  {
+    "title":"​DON'T",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​830/​0003583014_50.jpg"
+  },
+  {
+    "title":"​NOBODY TO LOVE",
+    "artist":"​SIGMA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​874/​0003487472_50.jpg"
+  },
+  {
+    "title":"​JUBEL",
+    "artist":"​KLINGANDE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​986/​0003498615_50.jpg"
+  },
+  {
+    "title":"​SIRENS",
+    "artist":"​CHER LLOYD",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​320/​0003532065_50.jpg"
+  },
+  {
+    "title":"​COUNTING STARS",
+    "artist":"​ONEREPUBLIC",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​031/​155/​0003115551_50.jpg"
+  },
+  {
+    "title":"​LOVE NEVER FELT SO GOOD",
+    "artist":"​MICHAEL JACKSON",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​810/​0003481068_50.jpg"
+  },
+  {
+    "title":"​POMPEII",
+    "artist":"​BASTILLE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​020/​777/​0002077712_50.jpg"
+  },
+  {
+    "title":"​LOYAL",
+    "artist":"​CHRIS BROWN / LIL WAYNE / TYGA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​054/​0003405432_50.jpg"
+  },
+  {
+    "title":"​MONEY ON MY MIND",
+    "artist":"​SAM SMITH",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​032/​378/​0003237878_50.jpg"
+  },
+  {
+    "title":"​WAY WE ARE",
+    "artist":"​KOVE FT MELISSA STEEL",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​742/​0003574248_50.jpg"
+  },
+  {
+    "title":"​SHE LOOKS SO PERFECT",
+    "artist":"​5 SECONDS OF SUMMER",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​033/​519/​0003351999_50.jpg"
+  },
+  {
+    "title":"​RIPTIDE",
+    "artist":"​VANCE JOY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​351/​0003035124_50.jpg"
+  },
+  {
+    "title":"​MY LOVE",
+    "artist":"​ROUTE 94 FT JESS GLYNNE",
+    "image":"http:​/​/​a2.mzstatic.com/​us/​r30/​Music/​v4/​c9/​6d/​45/​c96d457a-ec8c-f057-4790-adc154ca85c7/​13UAEIM18260.60x60-50.jpg"
+  },
+  {
+    "title":"​I GOT U",
+    "artist":"​DUKE DUMONT FT JAX JONES",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​032/​083/​0003208368_50.jpg"
+  },
+  {
+    "title":"​DARK HORSE",
+    "artist":"​KATY PERRY FT JUICY J",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​150/​0003415084_50.jpg"
+  },
+  {
+    "title":"​AM I WRONG",
+    "artist":"​NICO & VINZ",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​032/​107/​0003210790_50.jpg"
+  },
+  {
+    "title":"​TIMBER",
+    "artist":"​PITBULL FT KESHA",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​031/​389/​0003138900_50.jpg"
+  },
+  {
+    "title":"​ONE MORE DAY (STAY WITH ME)",
+    "artist":"​EXAMPLE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​039/​0003503924_50.jpg"
+  },
+  {
+    "title":"​BAD",
+    "artist":"​DAVID GUETTA / SHOWTEK / VASSY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​118/​0003411857_50.jpg"
+  },
+  {
+    "title":"​GOOD KISSER",
+    "artist":"​USHER",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​793/​0003479345_50.jpg"
+  },
+  {
+    "title":"​STAY HIGH",
+    "artist":"​TOVE LO",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​210/​0003521077_50.jpg"
+  },
+  {
+    "title":"​DEMONS",
+    "artist":"​IMAGINE DRAGONS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​021/​223/​0002122337_50.jpg"
+  },
+  {
+    "title":"​SALUTE",
+    "artist":"​LITTLE MIX",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​945/​0003494523_50.jpg"
+  },
+  {
+    "title":"​I SEE FIRE",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​031/​185/​0003118575_50.jpg"
+  },
+  {
+    "title":"​UPTIGHT DOWNTOWN",
+    "artist":"​LA ROUX",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​325/​0003532566_50.jpg"
+  },
+  {
+    "title":"​I WANNA FEEL",
+    "artist":"​SECONDCITY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​217/​0003421759_50.jpg"
+  },
+  {
+    "title":"​WAKE ME UP",
+    "artist":"​AVICII",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​029/​286/​0002928684_50.jpg"
+  },
+  {
+    "title":"​HOW GOOD IT WAS",
+    "artist":"​COURTEENERS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​036/​749/​0003674981_50.jpg"
+  },
+  {
+    "title":"​LATCH",
+    "artist":"​DISCLOSURE FT SAM SMITH",
+    "image":"http:​/​/​a2.mzstatic.com/​us/​r30/​Music/​v4/​4d/​13/​c5/​4d13c551-9259-ae84-4ded-e97095d8e682/​5025425199233.60x60-50.jpg"
+  },
+  {
+    "title":"​RADIOACTIVE",
+    "artist":"​IMAGINE DRAGONS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​049/​0003504966_50.jpg"
+  },
+  {
+    "title":"​STRONGER THAN EVER",
+    "artist":"​RALEIGH RITCHIE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​033/​350/​0003335084_50.jpg"
+  },
+  {
+    "title":"​ONE",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​a5.mzstatic.com/​us/​r30/​Features6/​v4/​c5/​75/​fc/​c575fcfc-d59c-284c-3c75-eb2c49723012/​dj.sagclawj.60x60-50.jpg"
+  },
+  {
+    "title":"​MAGIC",
+    "artist":"​COLDPLAY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​908/​0003490858_50.jpg"
+  },
+  {
+    "title":"​THE MAN",
+    "artist":"​ALOE BLACC",
+    "image":"http:​/​/​c0903002.cdn.cloudfiles.rackspacecloud.com/​9804-the_man.jpg"
+  },
+  {
+    "title":"​DO YOU WANT TO BUILD A SNOWMAN",
+    "artist":"​KRISTEN BELL / AGATHA LEE MONN",
+    "image":"http:​/​/​a4.mzstatic.com/​us/​r30/​Music6/​v4/​fe/​13/​11/​fe1311bc-6510-20f8-d4ba-bd9fb9375615/​13DMGIM04472.60x60-50.jpg"
+  },
+  {
+    "title":"​SAIL",
+    "artist":"​AWOLNATION",
+    "image":"http:​/​/​cdn.7static.com/​static/​img/​sleeveart/​00/​010/​475/​0001047506_50.jpg"
+  },
+  {
+    "title":"​PHOTOGRAPH",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​830/​0003583021_50.jpg"
+  },
+  {
+    "title":"​CHOCOLATE",
+    "artist":"​1975",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​021/​292/​0002129205_50.jpg"
+  },
+  {
+    "title":"​HOW LONG WILL I LOVE YOU",
+    "artist":"​ELLIE GOULDING",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​533/​0003053315_50.jpg"
+  },
+  {
+    "title":"​HOLD ON WE'RE GOING HOME",
+    "artist":"​DRAKE FT MAJID JORDAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​827/​0003582790_50.jpg"
+  },
+  {
+    "title":"​HERE FOR YOU",
+    "artist":"​GORGON CITY FT LAURA WELSH",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​272/​0003527231_50.jpg"
+  },
+  {
+    "title":"​LET HER GO",
+    "artist":"​PASSENGER",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​021/​133/​0002113377_50.jpg"
+  },
+  {
+    "title":"​TENERIFE SEA",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​851/​0003585165_50.jpg"
+  },
+  {
+    "title":"​HEY BROTHER",
+    "artist":"​AVICII",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​029/​292/​0002929287_50.jpg"
+  },
+  {
+    "title":"​CHANGES",
+    "artist":"​FAUL & WAD AD VS PNAU",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​033/​146/​0003314611_50.jpg"
+  },
+  {
+    "title":"​SUMMERTIME SADNESS",
+    "artist":"​LANA DEL REY VS CEDRIC GERVAIS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​827/​0003582790_50.jpg"
+  },
+  {
+    "title":"​I'M A MESS",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​851/​0003585165_50.jpg"
+  },
+  {
+    "title":"​BIRTHDAY",
+    "artist":"​KATY PERRY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​245/​0003024545_50.jpg"
+  },
+  {
+    "title":"​ROAR",
+    "artist":"​KATY PERRY",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​030/​245/​0003024545_50.jpg"
+  },
+  {
+    "title":"​BLURRED LINES",
+    "artist":"​ROBIN THICKE / TI / PHARRELL",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​021/​944/​0002194484_50.jpg"
+  },
+  {
+    "title":"​NINA",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​851/​0003585165_50.jpg"
+  },
+  {
+    "title":"​HUNGER OF THE PINE",
+    "artist":"​ALT-J",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​991/​0003599115_50.jpg"
+  },
+  {
+    "title":"​BLOODSTREAM",
+    "artist":"​ED SHEERAN",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​035/​791/​0003579144_50.jpg"
+  },
+  {
+    "title":"​MR BRIGHTSIDE",
+    "artist":"​KILLERS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​000/​248/​0000024883_50.jpg"
+  },
+  {
+    "title":"​MAKE U BOUNCE",
+    "artist":"​DJ FRESH VS TC FT LITTLE NIKKI",
+    "image":"http:​/​/​c0903002.cdn.cloudfiles.rackspacecloud.com/​10626-dj-fresh-make-u-bounce.jpg"
+  },
+  {
+    "title":"​A THOUSAND YEARS",
+    "artist":"​CHRISTINA PERRI",
+    "image":"http:​/​/​cdn.7static.com/​static/​img/​sleeveart/​00/​014/​706/​0001470627_50.jpg"
+  },
+  {
+    "title":"​DO I WANNA KNOW",
+    "artist":"​ARCTIC MONKEYS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​028/​089/​0002808941_50.jpg"
+  },
+  {
+    "title":"​BEST DAY OF MY LIFE",
+    "artist":"​AMERICAN AUTHORS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​034/​599/​0003459906_50.jpg"
+  },
+  {
+    "title":"​BURN",
+    "artist":"​ELLIE GOULDING",
+    "image":"http:​/​/​a4.mzstatic.com/​us/​r2000/​007/​Music4/​v4/​d7/​0e/​a8/​d70ea86c-71ca-1c27-97fe-bb6b687485b2/​13UAAIM43348.60x60-50.jpg"
+  },
+  {
+    "title":"​ROYALS",
+    "artist":"​LORDE",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​028/​943/​0002894390_50.jpg"
+  },
+  {
+    "title":"​GET LUCKY",
+    "artist":"​DAFT PUNK FT PHARRELL WILLIAMS",
+    "image":"http:​/​/​artwork-cdn.7static.com/​static/​img/​sleeveart/​00/​026/​861/​0002686113_50.jpg"
+  },
+  {
+    "title":"​EVERYTHING IS AWESOME​",
+    "artist":"​TEGAN & SARA FT LONELY ISLAND​",
+    "image":"http:​/​/​a5.mzstatic.com/​us/​r30/​Music/​v4/​da/​15/​23/​da15237c-bae7-116c-49b9-23615b128751/​Lego_Movie_Sdtk_Cover_1500px_RGB_72dpi.60x60-50.jpg"
+  }
+];
+</script>
+</head>
+<body>
+<!-- Bop html container:
+    A element for the player container must be somewhere on the page with a tag of "data-bop-container".
+    The following options can be added as attributes on this div to control the size of the player that gets embedded.
+    options:
+        data-width: in px or %. This will be the width set for the player within the container, not the container itself.
+                use 100% when you want the player width to be adjustable based on the container width
+            ex: data-width="100%"
+            ex: data-width=""
+ -->
+<div class="bop-player" data-bop-container data-width="100%">
+    This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.
+</div>
+<p>
+    <!-- Bop JS methods:
+            playSong(artist, title): requires 2 parameters: First - 'artist' and secondly - 'title' - Please send with proper case and all punctuation, and modifiers (featuring, remix, etc)
+                note: you may have to escape quote marks with a \ depending on how you call the method.
+                note: DO NOT encode these strings. They will automatically be encoded when sent to our servers to retrieve the song.
+                ex: Bop.playSong("Imagine Dragons", "Demons")
+                ex: Bop.playSong("Ariana Grande", "Problem (ft. Iggy Azelea)");
+
+             play: plays the current song with the auto-detected, or current service
+                ex: Bop.play()
+            pause: pauses the current song.
+                ex: Bop.pause()
+            seek: seeks to the position - percentage based. accepts a float from 0 - 1
+                ex: Bop.seek(0.68) - seeks to 68% mark of the current song
+            seekRelative: seeks relative to the current position in seconds. accepts a positive or negative integer
+                ex: Bop.seekRelative(5)
+                ex: Bop.seekRelative(-5)
+
+            refreshBopLinks: will re-render metaplayers on page. Use this when html is changed instead of re-inserting the js from assets.bop.fm/embed.js
+                ex: Bop.refreshBopLinks()
+
+     -->
+	 <button onclick="playSong(songs[songid].artist,songs[songid].title);">Play/Pause</button>
+	 <button onclick="songid=songid+1;Bop.pause();playSong(songs[songid].artist,songs[songid].title);Bop.play()">Skip</button>
+    <!-- <button onclick="Bop.playSong('Imagine Dragons', 'Demons')">Play Imagine Dragons - Demons</button>
+    <button onclick="Bop.playSong('Ariana Grande', 'Problem (ft. Iggy Azelea)')">Play Ariana Grande - Problem (ft. Iggy Azelea)</button>
+<hr>
+<button onclick="Bop.play();">Play/Pause</button>
+<button onclick="Bop.pause();">Pause</button>
+<button onclick="Bop.seekRelative(10);">Seek > 10 seconds</button>
+<button onclick="Bop.seekRelative(-10);">Seek < 10 seconds</button>
+<input style="width: 150px;" placeholder="enter a percentage 0-100" type="text" onblur="if(this.value != '') { Bop.seek(this.value/100); }" /> -->
+</p>
+<!-- Bop JS events:
+	Attach an event handler to window._bopPlayerReady to register all other events. window._bopPlayerReady will be called when the player is first initialized.
+
+	To attach an event use the 'on' method on the Bop object.
+	on: accepts two parameters, first is the event you are listening for, second is the function called when that event happens. data will be passed to that function and varies based on which event is called. Examples below.
+		serviceDetect: fired when all services are done detecting for that user.
+			data is an Array of services detected for that user.
+			data ex: services: ["youtube", "itunes", "soundcloud", "spotify"]
+		songStart: fired when song has first started
+		songPause: fired when song has been paused
+		songResume: fired when song is played from a paused state
+		songEnd: fired when the song is finished playing
+		serviceSwitch: fired when a service selected either automatically on init of player or manually switched
+			data is a string of the new service being utilized
+			data ex: service: "spotify"
+		positionChange: fired every 500ms-1s with the current position of the playhead
+			data is two objects, time and perc with corresponding current time (in seconds), and current percentage (0-100) as a Float
+			data ex: time: 14.067, perc: 5.46
+ -->
+<script>
+
+	function playSong(artist,title){
+		Bop.playSong(artist, title);
+	}
+    var eventLogDiv = document.getElementById('jsEventLog');
+    function logger(data) {
+        var oldHtml = eventLogDiv.innerHTML;
+        eventLogDiv.innerHTML = (oldHtml ? oldHtml : '') + '\n' + (data ? JSON.stringify(data) : 'no data');
+    }
+    window._bopPlayerReady = function(data){
+        console.log('_bopPlayerReady called:', data);
+        Bop.on('positionChange', function(data){
+            //console.log('positionChange', data);
+            //logger(data);
+        });
+        Bop.on('serviceSwitch', function(data){
+            //console.log('serviceSwitch', data);
+            //logger(data);
+        });
+        Bop.on('serviceDetect', function(data){
+            //console.log('serviceDetect', data);
+            //logger(data);
+        });
+        Bop.on('songStart', function(data){
+            //console.log('songStart', data);
+            //logger(data);
+        });
+        Bop.on('songPause', function(data){
+            //console.log('songPause', data);
+            //logger(data);
+        });
+        Bop.on('songResume', function(data){
+            //console.log('songResume', data);
+            //logger(data);
+        });
+        Bop.on('songEnd', function(data){
+            //console.log('songEnd', data);
+            //logger(data);
+        });
+    }
+	
+</script>
+<!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
+<script async="true" src="http://assets.bop.fm/embed.js"></script>
+</body>
+</html>

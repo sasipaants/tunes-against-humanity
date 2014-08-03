@@ -16,7 +16,7 @@
         } else if (user) {
             if (isNewUser) {
                 // user authenticated with Firebase
-                id = user.id;
+                user.active = true
                 myFirebaseRef.child(user.uid).set(user);
             }
         } else {
