@@ -21,12 +21,14 @@
 	    var myFirebaseRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
         var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
         var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
-        
+        var loggedInUser;
+
         var auth = new FirebaseSimpleLogin(myFirebaseRef, function(error, user) {
 	        if (error) {
 	            // an error occurred while attempting login
 	            console.log(error);
 	        } else if (user) {
+                loggedInUser = user; //global var to save user obj
 	            if (isNewUser) {
 	                // user authenticated with Firebase
 	                id = user.id;
