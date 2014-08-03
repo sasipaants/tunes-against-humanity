@@ -34,3 +34,13 @@ body {
 	border: none;
 	font-size: 20px;
 }
+
+#next {
+    color: black;
+    background-color: #ffcc00;
+    width: 100px;
+    float: right;
+    border-radius: 6px;
+    border: none;
+    font-size: 20px;
+}
