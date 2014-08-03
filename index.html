@@ -13,6 +13,8 @@
     <script src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/firebase.js"></script>
+	<script src="js/tah-mobile.js"></script>
   	<script>
 	    var isNewUser = true;
 	    var myFirebaseRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
@@ -64,13 +66,22 @@
             <h1>Tunes Against Humanity</h1>
         </div>
         <div data-role="content">
-        	<ul class="list-music">
+        	<ul id="list-music">
         		<li class="list-music-item">
-        			​CRAZY STUPID LOVE - CHERYL COLE FT TINIE TEMPAH
-        		</li>
+        			<div class="song-title">
+        				CRAZY STUPID LOVE
+        			</div>
+        			​<div class="song-artist">
+        				CHERYL COLE FT TINIE TEMPAH
+    				</div>
+        		
         		<li class="list-music-item">
-        			CRAZY STUPID LOVE - CHERYL COLE FT TINIE TEMPAH
-        		</li>
+        			<div class="song-title">
+        				CRAZY STUPID LOVE 13adfasdf4345
+        			</div>
+        			​<div class="song-artist">
+        				CHERYL COLE FT TINIE TEMPAH
+    				</div>
     		</ul>
         </div>
     </div>
@@ -116,5 +127,8 @@
         <div data-role="content">
         </div>
     </div>
+    
+    <script src="https://vivid-fire-183.firebaseapp.com/js/firebase.js"></script>
+    
 </body>
 </html>
