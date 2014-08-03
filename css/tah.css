@@ -1,0 +1,23 @@
+h1 {
+	font-size: 55px;
+	margin: 0px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 5px;
+}
+
+.logo {
+	width: 50px;
+}
+
+.twitter {
+	right: 5px;
+	bottom: 5px;
+	position: absolute;
+}
+
+#twitter-login {
+	cursor: pointer;
+}
