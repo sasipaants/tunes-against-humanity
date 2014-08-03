@@ -40,6 +40,7 @@
                         "name": user.displayName
                     });
                 });
+                $.mobile.changePage("#prompt");
 	        } else {
 	            // user is logged out
 	        }
@@ -49,7 +50,6 @@
             $("#login").click( function()
                {
                  auth.login('twitter');
-                 $('#login').hide();
                }
             );
         });
@@ -81,12 +81,16 @@
         <div data-role="content">
         	<ul id="list-music">
         		<li class="list-music-item">
+                    <div class="controls"><a href="#" class="ui-btn ui-btn-inline">&#9654;</a>
+                    <a href="#" class="ui-btn ui-btn-inline">&#8214;</a></div>
         			<div class="song-title">
         				CRAZY STUPID LOVE
         			</div>
         			​<div class="song-artist">
         				CHERYL COLE FT TINIE TEMPAH
     				</div>
+                    <div class="controls"><a href="#" class="ui-btn ui-btn-inline">&#9654;</a>
+                    <a href="#" class="ui-btn ui-btn-inline">&#8214;</a></div>
         		</li>
         		<li class="list-music-item">
         			<div class="song-title">CRAZY STUPID LOVE 13adfasdf</div>
