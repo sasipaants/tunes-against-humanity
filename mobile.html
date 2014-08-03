@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js"></script>
+    <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+  </head>
+  <body>
+  <button id='login'>Login</button>
+  <script>
+    var isNewUser = true;
+    var myFirebaseRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
+    var auth = new FirebaseSimpleLogin(myFirebaseRef, function(error, user) {
+        if (error) {
+            // an error occurred while attempting login
+            console.log(error);
+        } else if (user) {
+            if (isNewUser) {
+                // user authenticated with Firebase
+                myFirebaseRef.set(user)
+            }
+        } else {
+            // user is logged out
+        }
+    });
+    $(function() {
+        $("#login").click( function()
+           {
+             auth.login('twitter');
+             $('#login').hide()
+           }
+        );
+    });
+    //alert("test done");
+  </script>
+  </body>
+</html>
