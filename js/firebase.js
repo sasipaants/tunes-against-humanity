@@ -79,11 +79,6 @@ function submitSong(userId, song, artist, callback) {
   }); 
 }
 
-submitSong("12345", "Music for breaking up with your cofounder", "Purple Rain", function(error, questions) {
-  console.log(error);
-  console.log(questions);
-});
-
 function submitVote(userId, votedUserId, callback) {
   
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
@@ -97,9 +92,6 @@ function submitVote(userId, votedUserId, callback) {
   }); 
 }
 
-submitVote("12345", "999999", function(error, answers) {
-  console.log(error);
-});
 
 //Get correct answer for prompt
 
