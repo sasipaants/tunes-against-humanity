@@ -167,10 +167,10 @@
             num_song_choices++;
             if (num_song_choices == MAX_PLAYERS) {
                 $('#start').attr("disabled", false);
-                $('#start').removeClass("start-disabled");
+                $('#start').removeClass("btn-disabled");
             } else {
                 $('#start').attr("disabled", true);
-                $('#start').addClass("start-disabled");
+                $('#start').addClass("btn-disabled");
             }
         });
 
@@ -203,7 +203,7 @@
     function displayUserHTML(user, element) {
         $(element).append('\
             <div class="card card-option card-footer"> \
-              <img src=' + user.image + ' class="user-thumbnail"> \
+              <img src=' + user.image.replace("_normal", "") + ' class="user-thumbnail"> \
               <div class="user-name">' + user.name + '</div> \
             </div> \
             ');
