@@ -30,7 +30,7 @@
           <!-- <div class="footer-title">Players...</div> -->
           <div class="footer-players">
             <div class="footer-title">Players...</div>
-          <button id="start" >Start</button>
+          <button id="start" disabled>Start</button>
         </div>
         <div class="players"></div>
         </div>
@@ -87,7 +87,9 @@
     var usersRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
     var promptRef = new Firebase("https://vivid-fire-183.firebaseio.com/prompts");
     var gamesRef = new Firebase(FIREBASE_URL + "games");
-    var players = [];
+    var num_song_choices = 0;
+    var num_players = 0;
+    var MAX_PLAYERS = 5;
 
     var data = {
       "questions": {
@@ -109,6 +111,15 @@
     });
 
     var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
+    var playerChoicesRef = newGame.child('questions').child('playerChoices')
+
+    playerChoicesRef.on('child_added', function (snapshot){
+        user = snapshot.val()
+        num_song_choices++;
+        if (num_song_choices == MAX_PLAYERS) {
+            $('#start').disabled = false;
+        }
+    });
 
     playersRef.on('child_added', displayUsers);
 
@@ -145,12 +156,12 @@
         console.log(snapshot.val());
         var user = snapshot.val();
         var user_pic = user.image;
-        players.push(user);
         displayUserHTML(user, '.players');
+        num_players++;
     }
 
     $('#start').click(function() {
-        $.mobile.changePage('#music')
+        $.mobile.changePage('#music');
     });
 
   </script>
