@@ -20,11 +20,14 @@ h1 {
 	box-shadow: 1px 1px 5px #E2E2E2;
 	border-radius: 5px;
 	padding: 10px;
-	width: 38%;
 	height: 150px;
 	margin-right: 10px;
-	margin-bottom: 10px; 
+	margin-bottom: 10px;
 
+}
+
+.card-option-vote {
+	width: 148px;
 }
 
 .card-answer {
@@ -121,14 +124,18 @@ h1 {
 }
 
 .user-name {
+	color: black;
 	font-size: 20px;
 	text-align: center;
 	font-weight: bold;
 	padding: 10px;
+	text-shadow: 0 0px 0 #000;
 }
 
 .user-thumbnail {
 	width: 100px;
 	border-radius: 50px;
-	border: 1px solid rgb(189, 186, 186);
+	border: 1px solid black;
+	text-align: center;
+	margin-left: 23px;
 }
