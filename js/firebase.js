@@ -61,6 +61,18 @@ function getPlayers(callback) {
 }
 
 //Submit Answer for Prompt (add choice to game)
+function submitSong(userId, song, artist, callback) {
+  var data = {
+    song_title: song,
+    song_artist: artist
+  };
+  var playerRef = new Firebase(FIREBASE_URL + '/game/userId');
+  playerRef.push(data, function(error) {
+    callback(error);
+  }
+}
+
+
 
 //Get correct answer for prompt
 
