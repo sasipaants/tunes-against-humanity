@@ -193,9 +193,10 @@ function startGuessing() {
           user = snapshot.val();
           num_song_choices++;
           if (num_song_choices == MAX_PLAYERS) {
-              $('#btn-play').attr("disabled", false);
+              // $('#btn-play').attr("disabled", false);
+              getPlayersAPI();
           } else {
-              $('#btn-play').attr("disabled", true);
+              // $('#btn-play').attr("disabled", true);
           }
       });
   });
