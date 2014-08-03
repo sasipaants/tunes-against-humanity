@@ -4,18 +4,21 @@ h1 {
 }
 
 .card {
-	border: 1px solid black;
-	box-shadow: 3px 3px 5px #888888;
+	border: 1px solid rgb(189, 186, 186);
+	box-shadow: 1px 1px 5px #E2E2E2;
 	border-radius: 5px;
 	padding: 10px;
-	width: 45%;
-	height: 200px; 
+	width: 38%;
+	height: 150px;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px; 
 
 }
 
 .card-wrapper {
 	height: 650px;
-	padding: 15px;
+	padding: 20px;
 }
 
 .footer {
@@ -72,4 +75,15 @@ h1 {
 	padding: 10px;
 	line-height: 30px;
 	text-transform: uppercase;
+}
+
+.user-name {
+	text-align: center;
+	padding: 10px;
+}
+
+.user-thumbnail {
+	width: 100px;
+	border-radius: 50px;
+	border: 1px solid rgb(189, 186, 186);
 }
