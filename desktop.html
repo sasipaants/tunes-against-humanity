@@ -1,10 +1,16 @@
 <html>
   <head>
-      <link rel="stylesheet" href="themes/jquery-mobile-tah.min.css" />
+      <!-- <link rel="stylesheet" href="themes/jquery-mobile-tah.min.css" /> -->
       <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
       <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.3.min.css" />
 
+
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="css/desktop/bootstrap.min.css"/>
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="css/desktop/bootstrap-theme.min.css"/>
       <link rel="stylesheet" href="css/tah.css" />
+      <link rel="stylesheet" href="css/tah-desktop.css" />
     <script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js"></script>
 
@@ -12,12 +18,18 @@
     <script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
   </head>
-  <body>
-    <div data-role="page" id="lobby">
-        <div id="prompt"></div>
-        <div id="imagediv"></div>
-        <button id="start">Start</button>
+  <body style="background-color: black;">
+    <div data-role="page" id="lobby" class="container">
+        <div class="tah-title">Tunes Against Humanity</div>
+        <div id="prompt" class="jumbotron"></div>
+        <!-- <div id="imagediv"></div> -->
+        <div class="footer-main">
+          <button id="start" >Start</button>
+        </div>
+        
     </div>
     <div data-role="page" id="music">
         <div class="bop-player" data-bop-container data-width="100%">
