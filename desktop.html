@@ -132,7 +132,7 @@
     var prompt;
     var num_song_choices = 0;
     var num_players = 0;
-    var MAX_PLAYERS = 2;
+    var MAX_PLAYERS = 4;
 
     getPrompt(getPromptCallback);
 
@@ -145,6 +145,8 @@
             }
           }
         };
+
+        gamesRef.remove();
 
         var newGame = gamesRef.push(data);
 
