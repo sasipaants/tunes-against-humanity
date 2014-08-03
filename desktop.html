@@ -98,7 +98,7 @@
 
                 <div style="float:right;">
                     <!-- <button id="endgame" class="nextbutton" onclick="$.mobile.changePage('#scoreboard')">End Game</button><br> -->
-                    <button id="newgame" class="nextbutton" onclick="$.mobile.changePage('#lobby')">New Game</button>
+                    <button id="newgame" class="nextbutton" onclick="window.location='/desktop.html'">New Game</button>
                 </div>
 
                 <div id="answer-wrong">
@@ -199,7 +199,7 @@
     }
 
     function displayUsers (snapshot) {
-        console.log(snapshot.val());
+//        console.log(snapshot.val());
         var user = snapshot.val();
         var user_pic = user.image;
         displayUserHTML(user, '.players');
@@ -217,7 +217,7 @@
     function songToPlayCallback(error, data) {
         console.log("Get Song To Play Error: " + JSON.stringify(error));
         console.log("Get Song To Play Response: " + JSON.stringify(data));
-        Bop.playSong(data.artist, data.title);
+        Bop.playSong(data.artist, data.song);
 
         // Bop.playSong('lil jon', 'turn down for what');
     }
