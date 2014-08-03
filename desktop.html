@@ -36,8 +36,21 @@
         </div>
     </div>
     <div data-role="page" id="music">
-        <div class="bop-player" data-bop-container data-width="100%">
-            This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.
+        <div id="guessingprompt" class="jumbotron">
+        </div>
+        <div class="footer-main">
+            <!-- <div class="footer-title">Players...</div> -->
+            <div class="footer-players">
+                <div class="footer-title">Players...</div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+            </div>
         </div>
         <div class="footer-players">
             <div class="footer-title">Waiting for...</div>
@@ -63,6 +76,11 @@
             
         </script>
     </div>
+    <div data-role="page" id="hiddden">
+        <div class="bop-player" data-bop-container data-width="100%">
+            <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
+        </div>
+    </div>
 
   <script type="text/javascript">
     var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
@@ -76,7 +94,7 @@
         "question1": {
           "text": "What song does Paul Graham listen to in the shower"
         }
-      },
+      }
     };
 
     var newGame = gamesRef.push(data);
