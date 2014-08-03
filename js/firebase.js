@@ -61,19 +61,45 @@ function getPlayers(callback) {
 }
 
 //Submit Answer for Prompt (add choice to game)
-/*
+
 function submitSong(userId, song, artist, callback) {
   var data = {
-    song_title: song,
-    song_artist: artist
+    song: song,
+    artist: artist
   };
-  var playerRef = new Firebase(FIREBASE_URL + '/game/userId');
-  playerRef.push(data, function(error) {
-    callback(error);
-  }
-}
-*/
 
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    var questionsRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
+    questionsRef.child(userId).set(data, function(error) {
+      callback(error, questionsRef);
+    });
+  }); 
+}
+
+submitSong("12345", "Music for breaking up with your cofounder", "Purple Rain", function(error, questions) {
+  console.log(error);
+  console.log(questions);
+});
+
+function submitVote(userId, votedUserId, callback) {
+  
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    var answersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers");
+    answersRef.child(userId).set(votedUserId, function(error) {
+      callback(error, answersRef);
+    });
+  }); 
+}
+
+submitVote("12345", "999999", function(error, answers) {
+  console.log(error);
+});
 
 //Get correct answer for prompt
 
