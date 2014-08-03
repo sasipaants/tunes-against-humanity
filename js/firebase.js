@@ -8,6 +8,7 @@ function initDesktop(callback) {
   var game = {
     prompts: [
       {
+        id: "1",
         text: "What song does Paul Graham sing in the shower?"
       }
     ],
