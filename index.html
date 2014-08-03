@@ -13,8 +13,8 @@
     <script src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
-	<script src="/js/firebase.js"></script>
-	<script src="/js/tah-mobile.js"></script>
+	<script src="js/firebase.js"></script>
+	<script src="js/tah-mobile.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
   	<script>
 	    var isNewUser = true;
@@ -40,6 +40,8 @@
                         "name": user.displayName
                     });
                 });
+                loggedInUser = user; //global var to save user obj
+                console.log("Logged In User: " + user);
                 $.mobile.changePage("#prompt");
 	        } else {
 	            // user is logged out
@@ -137,20 +139,15 @@
             <h1>Tunes Against Humanity</h1>
         </div>
         <div data-role="content">
-        	<div class="card-wrapper">
-	        	<div class="card">
+        	<div class="card-wrapper" id="list-player">
+	        	<!-- <div class="card card-option card-option-vote">
 	        		<img src="image/user.jpg" class="user-thumbnail">
-	        		<div class="user-name">Sasi Ruang</div>
+	        		<div class="user-name">Sasi2</div>
 	        	</div>
-	        	<div class="card">
-	        		hello
-	        	</div>
-	        	<div class="card">
-	        		hello
-	        	</div>
-	        	<div class="card">
-	        		hello
-	        	</div>
+	        	<div class="card card-option card-option-vote">
+	        		<img src="image/user.jpg" class="user-thumbnail">
+	        		<div class="user-name">Sasi</div>
+	        	</div> -->
 	        </div>
         </div>
     </div>
