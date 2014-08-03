@@ -156,6 +156,7 @@ function startGuessing() {
             $('#btn-play').attr("disabled", true);
         }
     });
+  }
 }
 
 //Get correct answer for prompt on desktop
