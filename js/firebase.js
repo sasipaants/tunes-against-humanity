@@ -61,6 +61,7 @@ function getPlayers(callback) {
 }
 
 //Submit Answer for Prompt (add choice to game)
+/*
 function submitSong(userId, song, artist, callback) {
   var data = {
     song_title: song,
@@ -71,7 +72,7 @@ function submitSong(userId, song, artist, callback) {
     callback(error);
   }
 }
-
+*/
 
 
 //Get correct answer for prompt
