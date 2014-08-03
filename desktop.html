@@ -19,6 +19,7 @@
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/firebase.js"></script>
 
   </head>
   <body style="background-color: black;">
@@ -30,14 +31,7 @@
           <!-- <div class="footer-title">Players...</div> -->
           <div class="footer-players">
             <div class="footer-title">Players...</div>
-            <div class="card card-option card-footer">
-              <img src="image/user.jpg" class="user-thumbnail">
-              <div class="user-name">Sasi</div>
-            </div>
-             <div class="card card-option card-footer">
-              <img src="image/user.jpg" class="user-thumbnail">
-              <div class="user-name">Sasi</div>
-            </div>
+            
           </div>
           <button id="start" class="nextbutton" >Start</button>
         </div>
@@ -52,35 +46,23 @@
             </div>
         </div>
         <div class="footer-main">
-            <!-- <div class="footer-title">Players...</div> -->
             <div class="footer-players">
-                <div class="footer-title">Waiting For...</div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
-                </div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
-                </div>
+                <div class="footer-title">Waiting for...</div>
+                <div class="players"></div>
             </div>
-            <button id="next" class="nextbutton" onclick="$.mobile.changePage('#reveal')">NExt</button>
+            <button id="next" class="nextbutton" onclick="$.mobile.changePage('#reveal')">Next</button>
         </div>
-        <div class="footer-players">
-            <div class="footer-title">Waiting for...</div>
-            <div class="players"></div>
-        <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
-        <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
+
         <script async="true" src="http://assets.bop.fm/embed.js"></script>
         <script>
 //            $('#music').on( "pagechange", function( event ) {
 //                Bop.playSong('lil jon', 'turn down for what');
 //            } )
             
-            $( document ).on( "pageshow", "#music", function ( e, ui ) {
-                $('.prompt').text(prompt);
-                Bop.playSong('lil jon', 'turn down for what');
-            });
+            // $( document ).on( "pageshow", "#music", function ( e, ui ) {
+            //     // $('.prompt').text(prompt);
+            //     Bop.playSong('lil jon', 'turn down for what');
+            // });
 
             window._bopPlayerReady = function(data){
                 Bop.on('songStart', function(data){
@@ -102,21 +84,69 @@
         <div class="footer-main">
             <!-- <div class="footer-title">Players...</div> -->
             <div class="footer-players">
-                <div class="footer-title">Players...</div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
+                <div style="float:left;">
+                    <div class="footer-title" style="color: green;">Right...</div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
                 </div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
+
+                <div style="float:right;">
+                    <button id="endgame" class="nextbutton" onclick="$.mobile.changePage('#scoreboard')">End Game</button><br>
+                    <button id="newgame" class="nextbutton" onclick="$.mobile.changePage('#lobby')">New Game</button>
+                </div>
+
+                <div>
+                    <div class="footer-title" style="color: red;">Wrong...</div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
                 </div>
             </div>
-            <button id="endgame" class="nextbutton" >End Game</button>
-            <button id="newgame" class="nextbutton" >New Game</button>
+
         </div>
 
     </div>
+
+    <div data-role="page" id="scoreboard" class="container">
+        <div class="jumbotron scoreboard">
+            <p class="text prompt">Scoreboard</p>
+
+            <button class="footer-newgame" style="width:150px;" onclick="$.mobile.changePage('#lobby')">New Game</button>
+
+            <div id="scoreboard-winners">
+                <div class="scorecard">
+                    <div class="user-name">Sasi</div>
+                    <div>
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <p class="user-score">100</p>
+                    </div>
+                </div>
+                <br>
+                <div class="scorecard">
+                    <div class="user-name">Sasi</div>
+                    <div>
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <p class="user-score">57</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+        </div>
+    </div>
+
     <div data-role="page" id="hiddden">
         <div class="bop-player" data-bop-container data-width="100%">
             <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
@@ -202,7 +232,17 @@
         num_players++;
     }
 
+    function songToPlayCallback(error, data) {
+        console.log("Song To Play Error: " + JSON.stringify(error));
+        console.log("Song To Play Response: " + JSON.stringify(data));
+        $('.prompt').text(prompt);
+        Bop.playSong('lil jon', 'turn down for what');
+
+        // Bop.playSong('lil jon', 'turn down for what');
+    }
+
     $('#start').click(function() {
+        getSongToPlay(songToPlayCallback);
         $.mobile.changePage('#music');
     });
 

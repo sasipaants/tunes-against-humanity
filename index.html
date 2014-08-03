@@ -37,12 +37,14 @@
                     var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
                     playersRef.child(user.id).set({
                         "image": user.thirdPartyUserData.profile_image_url_https,
-                        "name": user.displayName
+                        "name": user.displayName,
+                        "id": user.id
                     });
                 });
                 loggedInUser = user; //global var to save user obj
                 console.log("Logged In User: " + user);
-                $.mobile.changePage("#prompt");
+                getSongsAPI();
+                // $.mobile.changePage("#prompt");
 	        } else {
 	            // user is logged out
 	        }
@@ -156,7 +158,13 @@
         <div data-role="header">
             <h1>Tunes Against Humanity</h1>
         </div>
-        <div data-role="content">
+        <div data-role="content" class="page-content">
+         	<div class="correct">Correct!</div>
+         	<div class="myanswer">Your answer was...</div>
+         	<div class="card card-answer" id="answer-content">
+ 	    		<!-- <img src="image/user.jpg" class="user-thumbnail">
+ 	    		<div class="user-name">Sasi</div> -->
+ 	    	</div>
         </div>
     </div>
 
@@ -166,6 +174,33 @@
             <h1>TaH</h1>
         </div>
         <div data-role="content">
+        	<div data-role="content" class="page-content">
+         	<h1>Tunes</h1>
+         	<h1>Against</h1>
+         	<h1>Humanity</h1>
+ 
+         	<div class="footer footer-waiting">
+     			<h3>Score: </h3>
+     		</div>
+                </div>
+        </div>
+    </div>
+
+
+    <div id="gameinprogress" data-role="page">
+        <div data-role="header">
+            <h1>TaH</h1>
+        </div>
+        <div data-role="content">
+            <div data-role="content" class="page-content">
+                <h1>Tunes</h1>
+                <h1>Against</h1>
+                <h1>Humanity</h1>
+
+                <div class="footer footer-waiting">
+                    <!--<h3>Score: </h3>-->
+                </div>
+            </div>
         </div>
     </div>
 
