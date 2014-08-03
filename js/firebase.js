@@ -62,26 +62,32 @@ function submitVote(userId, votedUserId, votedUserImage, votedUserName, callback
       "image": votedUserImage,
       "name": votedUserName,
       "id": votedUserId,
-      "correct": true
+      "correct": false
   };
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
   var root = new Firebase(FIREBASE_URL);
   var currentGameRef = root.child("games").limit(1);
   currentGameRef.once('child_added', function(snapshot) {
-    var answersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers");
-    answersRef.child(userId).set(votedUser, function(error) {
-      callback(error, votedUser);
+    var questionRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1");
+    questionRef.once('value', function(question) {
+      if (question.val().correctAnswer.userId == votedUserId) {
+        votedUser.correct = true;
+      }
+      var answerRef = questionRef.child("playerAnswers");
+      answerRef.child(userId).set(votedUser, function(error) {
+        callback(error, votedUser);
+      });
     });
   }); 
 }
+/*
+submitVote("12323224", "12345", "http://", "blah blah", function(error, vote) {
+  console.log(vote);
+});
+*/
 
+//Mark a song by the userId
 function markSongToPlay(callback) {
-
-}
-
-//which song to play
-function getSongToPlay(callback) {
-  
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
   var root = new Firebase(FIREBASE_URL);
   var currentGameRef = root.child("games").limit(1);
@@ -92,19 +98,36 @@ function getSongToPlay(callback) {
         value["userId"] = key;
         return value;
       }));
-      snapshot.child("questions/question1/correctAnswer").set(song.userId);
+       var currentGame =  new Firebase(FIREBASE_URL + "games/" + snapshot.name());
+      currentGame.child("questions/question1/correctAnswer").set(song);
       callback(null, song);
     });
   }); 
 }
 
+//which song to play
+function getSongToPlay(callback) {
+  
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    var answerRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/correctAnswer");
+    answerRef.once('value', function(snapshot) {
+      callback(null,snapshot.val());
+    });
+  }); 
+}
+
 /*
-submitSong("12345", "Purple Rain", "Prince", function(error) {
-  getSongToPlay(function(error, game) {
-    console.log(game);
+submitSong("12345", "Prince", "Raspberry Beret", function(error) {
+  markSongToPlay(function(error, song) {
+    getSongToPlay(function (error, song) {
+      console.log(song);
+    });
   });
 });
-*/
+*/  
 
 /*
 who picked the song, who was right, and who was wrong
@@ -136,11 +159,6 @@ function getFinalState(callback) {
     });
   });
 }
-
-
-getFinalState(function(error, game) {
-  console.log(game);
-});
 
 
 //Get your answer for final page on mobile
