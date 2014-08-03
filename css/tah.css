@@ -9,6 +9,11 @@ h1 {
     text-align:center;
 }
 
+.btn-plays {
+	padding-left: 8px;
+	/*text-align: right;*/
+}
+
 .card {
 	background-color: white;
 	border: 1px solid rgb(189, 186, 186);
@@ -56,6 +61,7 @@ h1 {
 	margin-left: -20px;;
 }
 
+
 .logo {
 	width: 50px;
 	padding-right: 5px;
@@ -98,13 +104,17 @@ h1 {
 
 
 .song-artist {
+	color: black;
 	font-size: 16px;
-	margin-top: -40px;	
+	margin-top: -20px;
 	padding: 10px;
+	margin-bottom: -10px;
 }
 
 .song-title {
+	color: black;
 	font-size: 25px;
+	font-weight: bold;
 	padding: 10px;
 	line-height: 30px;
 	text-transform: uppercase;
