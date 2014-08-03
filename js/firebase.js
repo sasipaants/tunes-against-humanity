@@ -140,7 +140,10 @@ function  getMyAnswer(twitterId, callback) {
 function startGuessing() {
     console.log("Start guessing...");
     var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+    var root = new Firebase(FIREBASE_URL);
     var currentGameRef = root.child("games").limit(1);
+    var num_song_choices = 0;
+    var MAX_PLAYERS = 4;
     currentGameRef.once('child_added', function(snapshot) {
       var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
 
