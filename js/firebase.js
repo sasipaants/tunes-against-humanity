@@ -117,6 +117,37 @@ function  getMyAnswer(twitterId, callback) {
     });
 }
 
+function startGuessing() {
+    console.log("Start guessing...");
+    var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+    var gamesRef = new Firebase(FIREBASE_URL + "games");
+    var MAX_PLAYERS = 3;
+    var num_song_choices = 0;
+    var data = {
+      "questions": {
+        "question1": {
+          "text": "What song does Paul Graham listen to in the shower"
+        }
+      }
+    };
+
+    var newGame = gamesRef.push(data);
+    var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
+
+    // var playerChoicesRef = newGame.child('questions').child('playerChoices');
+    playersRef.on('child_added', function (snapshot) {
+        console.log("player count: " + JSON.stringify(snapshot.val()));
+        console.log("num song choices: " + num_song_choices);
+        user = snapshot.val();
+        num_song_choices++;
+        if (num_song_choices == MAX_PLAYERS) {
+            $('#btn-play').attr("disabled", false);
+        } else {
+            $('#btn-play').attr("disabled", true);
+        }
+    });
+}
+
 /*
 getFinalState(function(error, game) {
   console.log(game);
