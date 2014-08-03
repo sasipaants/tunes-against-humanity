@@ -86,14 +86,14 @@
             <div class="footer-players">
                 <div style="float:left;" id="answer-right">
                     <div class="footer-title" style="color: green;">Right...</div>
-                    <div class="card card-option card-footer">
+                    <!-- <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
                         <div class="user-name">Sasi</div>
                     </div>
                     <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
                         <div class="user-name">Sasi</div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div style="float:right;">
@@ -103,14 +103,14 @@
 
                 <div id="answer-wrong">
                     <div class="footer-title" style="color: red;">Wrong...</div>
-                    <div class="card card-option card-footer">
+                    <!-- <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
                         <div class="user-name">Sasi</div>
                     </div>
                     <div class="card card-option card-footer">
                         <img src="image/user.jpg" class="user-thumbnail">
                         <div class="user-name">Sasi</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -209,11 +209,17 @@
     }
 
     function songToPlayCallback(error, data) {
-        console.log("Song To Play Error: " + JSON.stringify(error));
-        console.log("Song To Play Response: " + JSON.stringify(data));
+        console.log("Get Song To Play Error: " + JSON.stringify(error));
+        console.log("Get Song To Play Response: " + JSON.stringify(data));
         Bop.playSong(data.artist, data.title);
 
         // Bop.playSong('lil jon', 'turn down for what');
+    }
+
+    function makeSongToPlayCallback(error, data) {
+        console.log("Make Song To Play Error: " + JSON.stringify(error));
+        console.log("Make Song To Play Response: " + JSON.stringify(data));
+        getSongToPlay(songToPlayCallback);
     }
 
     function getFinalStateAPI() {
@@ -244,7 +250,8 @@
     }
 
     $('#start').click(function() {
-        getSongToPlay(songToPlayCallback);
+        makeSongToPlay(makeSongToPlayCallback);
+        // getSongToPlay(songToPlayCallback);
         $.mobile.changePage('#music');
     });
 
