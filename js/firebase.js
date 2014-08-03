@@ -136,6 +136,28 @@ function  getMyAnswer(twitterId, callback) {
       });
     });
 }
+
+function startGuessing() {
+    console.log("Start guessing...");
+    var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+    var currentGameRef = root.child("games").limit(1);
+    currentGameRef.once('child_added', function(snapshot) {
+    var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
+
+    // var playerChoicesRef = newGame.child('questions').child('playerChoices');
+    playersRef.on('child_added', function (snapshot) {
+        console.log("player count: " + JSON.stringify(snapshot.val()));
+        console.log("num song choices: " + num_song_choices);
+        user = snapshot.val();
+        num_song_choices++;
+        if (num_song_choices == MAX_PLAYERS) {
+            $('#btn-play').attr("disabled", false);
+        } else {
+            $('#btn-play').attr("disabled", true);
+        }
+    });
+}
+
 //Get correct answer for prompt on desktop
 
 

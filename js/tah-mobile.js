@@ -1,8 +1,8 @@
 $( document ).ready(function() {
 	// getSongsAPI();
-	getPlayersAPI();
+	// getPlayersAPI();
 
-	
+
 
 });
 function getSongsAPI() {
@@ -49,6 +49,8 @@ function getPlayersCallback(error, data) {
 		cardDiv.append(imgDiv).append(nameDiv);
 		listMusic.append(cardDiv);
 	}
+
+	$.mobile.changePage( '#guess', { transition: 'slide'} );
 }
 
 

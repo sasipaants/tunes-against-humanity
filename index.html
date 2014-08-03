@@ -43,6 +43,7 @@
                 });
                 loggedInUser = user; //global var to save user obj
                 console.log("Logged In User: " + user);
+                startGuessing();
                 getSongsAPI();
                 // $.mobile.changePage("#prompt");
 	        } else {
@@ -129,8 +130,10 @@
         	<h1>Humanity</h1>
 
         	<div class="footer footer-waiting">
+
     			<!-- <img class="logo" src="image/tah-logo.png"/> -->
     			<h3> Please wait for game to start... </h3>
+    			<button id="btn-play" style="width:150px;" disabled="true" onclick="getPlayersAPI();">Play!</button>
     		</div>
 
         </div>
