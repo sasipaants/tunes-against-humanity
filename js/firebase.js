@@ -25,12 +25,9 @@ function getSongs(callback) {
   songsRef.on('value', function (snapshot) {
     callback(null, snapshot.val());
   }, function (errorObject) {
-    console.log(errorObject.code);
+    callback(errorObject.code);
   });
 }
-getSongs(function(error, songs){
-  console.log(songs);
-});
 
 //Get List of Players
 
