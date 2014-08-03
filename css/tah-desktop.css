@@ -44,3 +44,45 @@ body {
     border: none;
     font-size: 20px;
 }
+
+#endgame {
+    color: black;
+    background-color: #ffcc00;
+    width: 150px;
+    /*float: right;*/
+    border-radius: 6px;
+    border: none;
+    font-size: 20px;
+}
+
+#newgame {
+    color: black;
+    background-color: #ffcc00;
+    width: 150px;
+    /*float: right;*/
+    border-radius: 6px;
+    border: none;
+    font-size: 20px;
+}
+
+#scoreboard-winners {
+    width:400px;
+    display: inline-block;
+}
+
+.scoreboard {
+    text-align: center;
+}
+
+.scorecard {
+    background-color: white;
+    border: 1px solid rgb(189, 186, 186);
+    box-shadow: 1px 1px 4px #999;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.container .jumbotron {
+    height:100%;
+}
