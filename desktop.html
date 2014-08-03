@@ -84,21 +84,69 @@
         <div class="footer-main">
             <!-- <div class="footer-title">Players...</div> -->
             <div class="footer-players">
-                <div class="footer-title">Players...</div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
+                <div style="float:left;">
+                    <div class="footer-title" style="color: green;">Right...</div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
                 </div>
-                <div class="card card-option card-footer">
-                    <img src="image/user.jpg" class="user-thumbnail">
-                    <div class="user-name">Sasi</div>
+
+                <div style="float:right;">
+                    <button id="endgame" class="nextbutton" onclick="$.mobile.changePage('#scoreboard')">End Game</button><br>
+                    <button id="newgame" class="nextbutton" onclick="$.mobile.changePage('#lobby')">New Game</button>
+                </div>
+
+                <div>
+                    <div class="footer-title" style="color: red;">Wrong...</div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
+                    <div class="card card-option card-footer">
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <div class="user-name">Sasi</div>
+                    </div>
                 </div>
             </div>
-            <button id="endgame" class="nextbutton" >End Game</button>
-            <button id="newgame" class="nextbutton" >New Game</button>
+
         </div>
 
     </div>
+
+    <div data-role="page" id="scoreboard" class="container">
+        <div class="jumbotron scoreboard">
+            <p class="text prompt">Scoreboard</p>
+
+            <button class="footer-newgame" style="width:150px;" onclick="$.mobile.changePage('#lobby')">New Game</button>
+
+            <div id="scoreboard-winners">
+                <div class="scorecard">
+                    <div class="user-name">Sasi</div>
+                    <div>
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <p class="user-score">100</p>
+                    </div>
+                </div>
+                <br>
+                <div class="scorecard">
+                    <div class="user-name">Sasi</div>
+                    <div>
+                        <img src="image/user.jpg" class="user-thumbnail">
+                        <p class="user-score">57</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-main">
+        </div>
+    </div>
+
     <div data-role="page" id="hiddden">
         <div class="bop-player" data-bop-container data-width="100%">
             <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
