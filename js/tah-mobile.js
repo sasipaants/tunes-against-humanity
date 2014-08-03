@@ -67,10 +67,17 @@ function selectSongCallback(error, data) {
 
 //User votes on which other user picked that song
 function voteOnUserAPI(twitterId, votedUserId, votedUserImage, votedUserName) {
-	var result = submitVote(twitterId, votedUserId, votedUserImage, votedUserName, voteOnUserCallback);
+	submitVote(twitterId, votedUserId, votedUserImage, votedUserName, voteOnUserCallback);
+	
+}
+
+function voteOnUserCallback(error, data) {
+	console.log("Vote Error: " + JSON.stringify(error));
+	console.log("Vote Response: " + JSON.stringify(data));
+	console.log("Result is " + data);
 	var answerDiv = $('#result');
 	var resultHTML;
-	if (result) {
+	if (data) {
 		resultHTML = $('<div class="correct">Correct!</div>');
 	} else {
 		resultHTML = $('<div class="correct">Wrong!</div>');
@@ -82,12 +89,7 @@ function voteOnUserAPI(twitterId, votedUserId, votedUserImage, votedUserName) {
 	cardDiv.append(imgDiv).append(nameDiv);
 	resultHTML.append(cardDiv);
 	answerDiv.append(resultHTML);
-	$.mobile.changePage( '#answer', { transition: 'slide'} );
-}
 
-function voteOnUserCallback(error, data) {
-	console.log("Vote Error: " + JSON.stringify(error));
-	console.log("Vote Response: " + JSON.stringify(data));
 	getMyAnswerAPI(loggedInUser.id);
 	$.mobile.changePage( '#answer', { transition: 'slide'} );
 }
@@ -99,10 +101,10 @@ function getMyAnswerAPI(twitterId) {
 function getMyAnswerCallback(error, data) {
 	console.log("My Answer Error: " + JSON.stringify(error));
 	console.log("My Answer Response: " + JSON.stringify(data));	
-	var answerDiv = $("#answer-content");
-	var imgDiv = $("<img src='"+data.image.replace("_normal", "")+"' class='user-thumbnail'>");
-	var nameDiv = $("<div class='user-name'>"+data.name.split(' ')[0]+"</div>");
-	answerDiv.append(imgDiv).append(nameDiv);
+	// var answerDiv = $("#answer-content");
+	// var imgDiv = $("<img src='"+data.image.replace("_normal", "")+"' class='user-thumbnail'>");
+	// var nameDiv = $("<div class='user-name'>"+data.name.split(' ')[0]+"</div>");
+	// answerDiv.append(imgDiv).append(nameDiv);
 	// <img src="image/user.jpg" class="user-thumbnail">
 	// <div class="user-name">Sasi</div>
 }
