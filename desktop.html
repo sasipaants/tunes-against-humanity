@@ -160,20 +160,13 @@
           console.log(error);
         });
 
-
-        if (num_players == MAX_PLAYERS) {
-            $('#start').attr("disabled", false);
-            $('#start').removeClass("btn-disabled");
-        } else {
-            $('#start').attr("disabled", true);
-            $('#start').addClass("btn-disabled");
-        }
+        var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
         playersRef.on('child_added', displayUsers);
     }
-
+    
     getPrompt(getPromptCallback);
 
-
+    
 
     function displayPrompt(snapshot) {
       /*
@@ -211,6 +204,14 @@
         var user_pic = user.image;
         displayUserHTML(user, '.players');
         num_players++;
+
+        if (num_players == MAX_PLAYERS) {
+            $('#start').attr("disabled", false);
+            $('#start').removeClass("btn-disabled");
+        } else {
+            $('#start').attr("disabled", true);
+            $('#start').addClass("btn-disabled");
+        }
     }
 
     function songToPlayCallback(error, data) {
