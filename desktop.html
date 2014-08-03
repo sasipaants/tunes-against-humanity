@@ -23,10 +23,17 @@
         <div class="bop-player" data-bop-container data-width="100%">
             This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.
         </div>
-        <button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>
+        <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
         <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
         <script async="true" src="http://assets.bop.fm/embed.js"></script>
         <script>
+//            $('#music').on( "pagechange", function( event ) {
+//                Bop.playSong('lil jon', 'turn down for what');
+//            } );
+            $( document ).on( "pageshow", "#music", function ( e, ui ) {
+                Bop.playSong('lil jon', 'turn down for what');
+            });
+
             window._bopPlayerReady = function(data){
                 Bop.on('songStart', function(data){
                     //skip 11 seconds
