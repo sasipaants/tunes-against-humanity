@@ -189,7 +189,9 @@
         user = snapshot.val();
         num_song_choices++;
         if (num_song_choices == MAX_PLAYERS) {
-            $('#start').disabled = false;
+            $('#start').attr("disabled", false);
+        } else {
+            $('#start').attr("disabled", true);
         }
     });
 
