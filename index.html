@@ -102,9 +102,6 @@
         		</li>
     		</ul>
 
-            <div class="bop-player" data-bop-container data-width="100%">
-                <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
-            </div>
             <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
             <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
             <script async="true" src="http://assets.bop.fm/embed.js"></script>
@@ -187,7 +184,13 @@
     		</div>
         </div>
     </div>
-    
+
+    <div id="hidden" data-role="page">
+        <div class="bop-player" data-bop-container data-width="100%">
+            <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
+        </div>
+    </div>
+
     <script src="/js/firebase.js"></script>
     
 </body>
