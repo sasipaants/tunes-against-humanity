@@ -25,7 +25,10 @@ function getPlayers(callback) {
     var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
     playersRef.on('value', function(snapshot) {
       var playersArray = [];
-      _.each(snapshot.val(), function(player) {
+      _.each(_.map(snapshot.val(), function(value, key) {
+        value["userId"] = key;
+        return value;
+      }), function(player) {
         playersArray.push(player);
       });
       callback(null, playersArray);
@@ -65,6 +68,10 @@ function submitVote(userId, votedUserId, callback) {
   }); 
 }
 
+function markSongToPlay(callback) {
+
+}
+
 //which song to play
 function getSongToPlay(callback) {
   
@@ -73,16 +80,24 @@ function getSongToPlay(callback) {
   var currentGameRef = root.child("games").limit(1);
   currentGameRef.once('child_added', function(snapshot) {
     var choicesRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
-    choicesRef.once('value', function(snapshot) {
-      var song = _.sample(_.map(snapshot.val(), function(value, key) {
+    choicesRef.once('value', function(snapshot2) {
+      var song = _.sample(_.map(snapshot2.val(), function(value, key) {
         value["userId"] = key;
         return value;
       }));
+      snapshot.child("questions/question1/correctAnswer").set(song.userId);
       callback(null, song);
     });
   }); 
 }
 
+/*
+submitSong("12345", "Purple Rain", "Prince", function(error) {
+  getSongToPlay(function(error, game) {
+    console.log(game);
+  });
+});
+*/
 
 //who picked the song, who was right, and who was wrong
 function getFinalState(callback) {
@@ -92,16 +107,15 @@ function getFinalState(callback) {
   var currentGameRef = root.child("games").limit(1);
   currentGameRef.once('child_added', function(snapshot) {
     console.log(snapshot.val());
-    var game = currentGameRef.child("/games").child(snapshot.name());
     callback(null, game);
   });
 }
 
-/*
+
 getFinalState(function(error, game) {
   console.log(game);
 });
-*/
+
 //Get correct answer for prompt
 
 //Get game over -  is number of answers == number of players
