@@ -30,18 +30,31 @@
           <!-- <div class="footer-title">Players...</div> -->
           <div class="footer-players">
             <div class="footer-title">Players...</div>
-          <button id="start" disabled>Start</button>
+            <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+             <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+          </div>
+          <button id="start" class="nextbutton" >Start</button>
         </div>
         <div class="players"></div>
         </div>
     </div>
-    <div data-role="page" id="music">
-        <div id="guessingprompt" class="jumbotron">
+    <div data-role="page" id="music" class="container">
+        <div class="jumbotron">
+            <p class="text prompt"></p>
+            <div id="musicgifDiv" style="background-image: url('http://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
+
+            </div>
         </div>
         <div class="footer-main">
             <!-- <div class="footer-title">Players...</div> -->
             <div class="footer-players">
-                <div class="footer-title">Players...</div>
+                <div class="footer-title">Waiting For...</div>
                 <div class="card card-option card-footer">
                     <img src="image/user.jpg" class="user-thumbnail">
                     <div class="user-name">Sasi</div>
@@ -51,6 +64,7 @@
                     <div class="user-name">Sasi</div>
                 </div>
             </div>
+            <button id="next" class="nextbutton" onclick="$.mobile.changePage('#reveal')">NExt</button>
         </div>
         <div class="footer-players">
             <div class="footer-title">Waiting for...</div>
@@ -64,6 +78,7 @@
 //            } )
             
             $( document ).on( "pageshow", "#music", function ( e, ui ) {
+                $('.prompt').text(prompt);
                 Bop.playSong('lil jon', 'turn down for what');
             });
 
@@ -76,6 +91,32 @@
             
         </script>
     </div>
+    <div data-role="page" id="reveal" class="container">
+        <div class="jumbotron">
+            <p class="text prompt"></p>
+            <div id="revealgifDiv" style="background-image: url('http://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
+
+            </div>
+        </div>
+        <!-- <div id="imagediv"></div> -->
+        <div class="footer-main">
+            <!-- <div class="footer-title">Players...</div> -->
+            <div class="footer-players">
+                <div class="footer-title">Players...</div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+            </div>
+            <button id="endgame" class="nextbutton" >End Game</button>
+            <button id="newgame" class="nextbutton" >New Game</button>
+        </div>
+
+    </div>
     <div data-role="page" id="hiddden">
         <div class="bop-player" data-bop-container data-width="100%">
             <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
@@ -87,9 +128,10 @@
     var usersRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
     var promptRef = new Firebase("https://vivid-fire-183.firebaseio.com/prompts");
     var gamesRef = new Firebase(FIREBASE_URL + "games");
+    var prompt;
     var num_song_choices = 0;
     var num_players = 0;
-    var MAX_PLAYERS = 5;
+    var MAX_PLAYERS = 4;
 
     var data = {
       "questions": {
@@ -111,10 +153,10 @@
     });
 
     var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
-    var playerChoicesRef = newGame.child('questions').child('playerChoices')
 
-    playerChoicesRef.on('child_added', function (snapshot){
-        user = snapshot.val()
+    var playerChoicesRef = newGame.child('questions').child('playerChoices');
+    playerChoicesRef.on('child_added', function (snapshot) {
+        user = snapshot.val();
         num_song_choices++;
         if (num_song_choices == MAX_PLAYERS) {
             $('#start').disabled = false;
@@ -135,7 +177,7 @@
             i++;
         });
         */
-        var prompt = snapshot.val().questions.question1.text;
+        prompt = snapshot.val().questions.question1.text;
         $('#prompt')
           .append('<p class="text">' + prompt + '</p>')
           .append("<div class='footer-card-main'><img class='logo' src='image/tah-logo.png'/><div class='tah-title'>Tunes Against Humanity</div></div>");
