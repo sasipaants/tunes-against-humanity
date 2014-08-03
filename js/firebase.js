@@ -209,7 +209,7 @@ function startGuessing() {
           console.log("num song choices: " + num_song_choices);
           user = snapshot.val();
           num_song_choices++;
-          if (num_song_choices == MAX_PLAYERS) {
+          if (num_song_choices >= MAX_PLAYERS) {
               // $('#btn-play').attr("disabled", false);
               getPlayersAPI();
           } else {
