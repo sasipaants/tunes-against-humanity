@@ -133,6 +133,11 @@ function getSongToPlay(callback) {
     answerRef.once('value', function(snapshot) {
       callback(null,snapshot.val());
     });
+    var gifref = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/");
+      gifref.once('value', function(snapshot) {
+          gif = snapshot.val().gif;
+          $('.gifDiv').css('background-image','url("'+gif+'")');
+      });
   }); 
 }
 

@@ -41,7 +41,7 @@
     <div data-role="page" id="music" class="container">
         <div class="jumbotron">
             <p class="text prompt"></p>
-            <div id="musicgifDiv" style="background-image: url('https://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
+            <div id="musicgifDiv" class="gifDiv" style="background-image: url('https://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
 
             </div>
         </div>
@@ -76,7 +76,7 @@
     <div data-role="page" id="reveal" class="container">
         <div class="jumbotron">
             <p class="text prompt"></p>
-            <div id="revealgifDiv" style="background-image: url('https://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
+            <div id="revealgifDiv" class="gifDiv" style="background-image: url('https://i.imgur.com/SHTD8Yh.gif'); background-position:center; background-repeat:no-repeat;background-size: contain;min-height:300px;">
 
             </div>
         </div>
@@ -213,11 +213,14 @@
             $('#start').addClass("btn-disabled");
         }
     }
-
+    var gif;
     function songToPlayCallback(error, data) {
         console.log("Get Song To Play Error: " + JSON.stringify(error));
         console.log("Get Song To Play Response: " + JSON.stringify(data));
         Bop.playSong(data.artist, data.song);
+
+
+//        $('.gifDiv').css('background-image','url("'+gif+'")');
 
         // Bop.playSong('lil jon', 'turn down for what');
     }
