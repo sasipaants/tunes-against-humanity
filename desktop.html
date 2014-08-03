@@ -160,28 +160,20 @@
           console.log(error);
         });
 
-        var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
 
-        var playerChoicesRef = newGame.child('questions').child('playerChoices');
-        playerChoicesRef.on('child_added', function (snapshot) {
-            console.log("Number of players Joined the game " + num_song_choices);
-            user = snapshot.val();
-            num_song_choices++;
-            if (num_song_choices == MAX_PLAYERS) {
-                $('#start').attr("disabled", false);
-                $('#start').removeClass("btn-disabled");
-            } else {
-                $('#start').attr("disabled", true);
-                $('#start').addClass("btn-disabled");
-            }
-        });
-
+        if (num_players == MAX_PLAYERS) {
+            $('#start').attr("disabled", false);
+            $('#start').removeClass("btn-disabled");
+        } else {
+            $('#start').attr("disabled", true);
+            $('#start').addClass("btn-disabled");
+        }
         playersRef.on('child_added', displayUsers);
     }
-    
+
     getPrompt(getPromptCallback);
 
-    
+
 
     function displayPrompt(snapshot) {
       /*
