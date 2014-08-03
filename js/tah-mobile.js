@@ -61,18 +61,33 @@ function selectSongAPI(title, artist, twitterId) {
 
 function selectSongCallback(error, data) {
 	console.log("Select Song Error: " + JSON.stringify(error));
-	console.log("Select Song Response: " + JSON.stringify(data));	
+	console.log("Select Song Response: " + JSON.stringify(data));
 	$.mobile.changePage( '#waiting', { transition: 'slide'} );
 }
 
 //User votes on which other user picked that song
 function voteOnUserAPI(twitterId, votedUserId, votedUserImage, votedUserName) {
-	submitVote(twitterId, votedUserId, votedUserImage, votedUserName, voteOnUserCallback);
+	var result = submitVote(twitterId, votedUserId, votedUserImage, votedUserName, voteOnUserCallback);
+	var answerDiv = $('#result');
+	var resultHTML;
+	if (result) {
+		resultHTML = $('<div class="correct">Correct!</div>');
+	} else {
+		resultHTML = $('<div class="correct">Wrong!</div>');
+	}
+	resultHTML.append('<div class="myanswer">Your answer was...</div>');
+	var cardDiv = $('<div class="card card-answer" id="answer-content"></div>');
+	var imgDiv =  $("<img src='"+ votedUserImage +"' class='user-thumbnail'/>");
+	var nameDiv = $("<div class='user-name'>"+ votedUserName +"</div>");
+	cardDiv.append(imgDiv).append(nameDiv);
+	resultHTML.append(cardDiv);
+	answerDiv.append(resultHTML);
+	$.mobile.changePage( '#answer', { transition: 'slide'} );
 }
 
 function voteOnUserCallback(error, data) {
 	console.log("Vote Error: " + JSON.stringify(error));
-	console.log("Vote Response: " + JSON.stringify(data));	
+	console.log("Vote Response: " + JSON.stringify(data));
 	getMyAnswerAPI(loggedInUser.id);
 	$.mobile.changePage( '#answer', { transition: 'slide'} );
 }
