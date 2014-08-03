@@ -208,7 +208,7 @@ function waitForNextRound() {
     var currentGameRef = root.child("games");
     currentGameRef.once('child_added', function(snapshot) {
         console.log("Next round starting.");
-        //window.location = 'index.html';
+        window.location = 'index.html';
     });
 }
 
