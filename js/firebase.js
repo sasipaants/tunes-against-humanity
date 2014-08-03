@@ -92,6 +92,26 @@ function submitVote(userId, votedUserId, callback) {
   }); 
 }
 
+//which song to play
+function getSongToPlay(callback) {
+  
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    var choicesRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
+    choicesRef.once('value', function(snapshot) {
+      var song = _.sample(_.map(snapshot.val(), function(value, key) {
+        value["userId"] = key;
+        return value;
+      }));
+      callback(null, song);
+    });
+  }); 
+}
+
+
+//who picked the song, who was right, and who was wrong
 
 //Get correct answer for prompt
 
