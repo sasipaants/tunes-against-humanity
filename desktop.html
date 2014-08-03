@@ -134,41 +134,49 @@
     var num_players = 0;
     var MAX_PLAYERS = 2;
 
-    var data = {
-      "questions": {
-        "question1": {
-          "text": "What song does Paul Graham listen to in the shower"
-        }
-      }
-    };
+    getPrompt(getPromptCallback);
 
-    var newGame = gamesRef.push(data);
+    function getPromptCallback(error, data) {
+        var data = {
+          "questions": {
+            "question1": {
+              "text": data[0].text,
+              "gif": data[0].gif
+            }
+          }
+        };
 
-    var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
+        var newGame = gamesRef.push(data);
 
-    currentGameRef.once('child_added', function(snapshot) {
-      displayPrompt(snapshot);
-    }, function(error) {
-      //oops
-      console.log(error);
-    });
+        var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
 
-    var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
+        currentGameRef.once('child_added', function(snapshot) {
+          displayPrompt(snapshot);
+        }, function(error) {
+          //oops
+          console.log(error);
+        });
 
-    var playerChoicesRef = newGame.child('questions').child('playerChoices');
-    playerChoicesRef.on('child_added', function (snapshot) {
-        user = snapshot.val();
-        num_song_choices++;
-        if (num_song_choices == MAX_PLAYERS) {
-            $('#start').attr("disabled", false);
-            $('#start').removeClass("start-disabled");
-        } else {
-            $('#start').attr("disabled", true);
-            $('#start').addClass("start-disabled");
-        }
-    });
+        var playersRef = new Firebase(FIREBASE_URL + "games/" + newGame.name() + "/players");
 
-    playersRef.on('child_added', displayUsers);
+        var playerChoicesRef = newGame.child('questions').child('playerChoices');
+        playerChoicesRef.on('child_added', function (snapshot) {
+            user = snapshot.val();
+            num_song_choices++;
+            if (num_song_choices == MAX_PLAYERS) {
+                $('#start').attr("disabled", false);
+                $('#start').removeClass("start-disabled");
+            } else {
+                $('#start').attr("disabled", true);
+                $('#start').addClass("start-disabled");
+            }
+        });
+
+        playersRef.on('child_added', displayUsers);
+    }
+    
+
+    
 
     function displayPrompt(snapshot) {
       /*
