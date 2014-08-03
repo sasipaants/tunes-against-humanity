@@ -44,8 +44,21 @@
         
     </div>
     <div data-role="page" id="music">
-        <div class="bop-player" data-bop-container data-width="100%">
-            This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.
+        <div id="guessingprompt" class="jumbotron">
+        </div>
+        <div class="footer-main">
+            <!-- <div class="footer-title">Players...</div> -->
+            <div class="footer-players">
+                <div class="footer-title">Players...</div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+            </div>
         </div>
         <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
         <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
@@ -65,6 +78,11 @@
                 });
             }
         </script>
+    </div>
+    <div data-role="page" id="hiddden">
+        <div class="bop-player" data-bop-container data-width="100%">
+            <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
+        </div>
     </div>
 
   <script type="text/javascript">
