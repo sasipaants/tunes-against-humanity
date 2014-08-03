@@ -5,12 +5,17 @@
 	<title>Tunes Against Humanity</title>
 	<link rel="stylesheet" href="themes/jquery-mobile-tah.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.3.min.css" />
+
+	<link rel="stylesheet" href="css/tah.css" />
+
     <script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js"></script>
-	<link rel="stylesheet" href="css/tah.css" />
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	<script src="js/firebase.js"></script>
+	<script src="js/tah-mobile.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
   	<script>
 	    var isNewUser = true;
 	    var myFirebaseRef = new Firebase("https://vivid-fire-183.firebaseio.com/users");
@@ -21,17 +26,18 @@
 	        } else if (user) {
 	            if (isNewUser) {
 	                // user authenticated with Firebase
-	                myFirebaseRef.push(user)
+	                id = user.id;
+	                myFirebaseRef.child(user.uid).set(user);
 	            }
 	        } else {
 	            // user is logged out
 	        }
 	    });
 	    $(function() {
-	        $("#twitter-login").click( function()
+	        $("#login").click( function()
 	           {
 	             auth.login('twitter');
-	             $('#login').hide()
+	             $('#login').hide();
 	           }
 	        );
 	    });
@@ -58,17 +64,42 @@
 
     <div id="prompt" data-role="page">
         <div data-role="header">
-            <h1>Tunes against Humanity</h1>
+            <h1>Tunes Against Humanity</h1>
         </div>
         <div data-role="content">
+        	<ul id="list-music">
+        		<li class="list-music-item">
+        			<div class="song-title">
+        				CRAZY STUPID LOVE
+        			</div>
+        			​<div class="song-artist">
+        				CHERYL COLE FT TINIE TEMPAH
+    				</div>
+        		
+        		<li class="list-music-item">
+        			<div class="song-title">
+        				CRAZY STUPID LOVE 13adfasdf4345
+        			</div>
+        			​<div class="song-artist">
+        				CHERYL COLE FT TINIE TEMPAH
+    				</div>
+    		</ul>
         </div>
     </div>
 
     <div id="waiting" data-role="page">
         <div data-role="header">
-            <h1>TaH</h1>
         </div>
         <div data-role="content">
+        	<h1>Tunes</h1>
+        	<h1>Against</h1>
+        	<h1>Humanity</h1>
+
+        	<div class="footer">
+    			<!-- <img class="logo" src="image/tah-logo.png"/> -->
+    			<h3> Please wait... </h3>
+    		</div>
+
         </div>
     </div>
 
@@ -77,6 +108,7 @@
             <h1>TaH</h1>
         </div>
         <div data-role="content">
+
         </div>
     </div>
 
@@ -97,7 +129,7 @@
         </div>
     </div>
     
-    <script src="https://vivid-fire-183.firebaseapp.com/js/firebase.js"></script>
+    <script src="/js/firebase.js"></script>
     
 </body>
 </html>
