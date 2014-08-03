@@ -142,6 +142,7 @@
       }
     };
 
+    gamesRef.remove();
     var newGame = gamesRef.push(data);
 
     var currentGameRef = new Firebase(FIREBASE_URL + "games").limit(1);
