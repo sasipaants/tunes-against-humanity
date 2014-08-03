@@ -1,7 +1,7 @@
 var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
 //Firebase Game Ref
 var gamesRef = new Firebase(FIREBASE_URL + '/games');
-var songsRef = new Firebase(FIREBASE_URL + '/songs').limit(10);
+var songsRef = new Firebase(FIREBASE_URL + '/songs');
 
 //Get Random 10 songs 
 function getSongs(callback) {
@@ -10,7 +10,7 @@ function getSongs(callback) {
     _.each(snapshot.val(), function(song) {
       songsArray.push(song);
     });
-    callback(null, songsArray);
+    callback(null, _.sample(songsArray, 10);
   }, function (errorObject) {
     callback(errorObject.code);
   });
@@ -193,9 +193,10 @@ function startGuessing() {
           user = snapshot.val();
           num_song_choices++;
           if (num_song_choices == MAX_PLAYERS) {
-              $('#btn-play').attr("disabled", false);
+              // $('#btn-play').attr("disabled", false);
+              getPlayersAPI();
           } else {
-              $('#btn-play').attr("disabled", true);
+              // $('#btn-play').attr("disabled", true);
           }
       });
   });
