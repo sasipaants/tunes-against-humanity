@@ -23,7 +23,7 @@ function getSongsCallback(error, data) {
 		var pauseDiv = $("<a href='#' class='ui-btn ui-btn-inline' onclick='Bop.pause();'>&#8214;</a>");
 
 		btnDiv.append(playDiv).append(pauseDiv);
-		listDiv.append(titleDiv).append(artistDiv).append(btnDiv);
+		listDiv.append(titleDiv).append(artistDiv);
 		listMusic.append(listDiv);
 
 
