@@ -231,7 +231,7 @@ function waitForNextRound() {
 
     var currentGameRef = root.child("games").limit(1);
     currentGameRef.on('child_added', function(snapshot) {
-        if(snapshot.child('players').numChildren() < 4 ) {
+        if(snapshot.child('players').numChildren() < 3 ) {
             //console.log("numplayers="+snapshot.child('players').numChildren());
             console.log("Next round starting.");
 //            window.location = 'index.html';
