@@ -56,11 +56,13 @@ function submitSong(userId, song, artist, callback) {
   }); 
 }
 
+//should return if vote was correct, try to add correct || incorrect to players
 function submitVote(userId, votedUserId, votedUserImage, votedUserName, callback) {
   var votedUser = {
       "image": votedUserImage,
       "name": votedUserName,
-      "id": votedUserId
+      "id": votedUserId,
+      "correct": true
   };
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
   var root = new Firebase(FIREBASE_URL);
@@ -104,23 +106,42 @@ submitSong("12345", "Purple Rain", "Prince", function(error) {
 });
 */
 
-//who picked the song, who was right, and who was wrong
+/*
+who picked the song, who was right, and who was wrong
+{
+  correct: 
+    [{userId: '1234', name: 'Bilbo Baggins', image: 'http://'}],
+  wrong: 
+    [{userId: '1235', name: 'Gollum', image: 'http://'}],
+  owner:
+    {userId: '1236', name: 'Sauron', image: 'http://'}
+}
+*/
 function getFinalState(callback) {
   
   var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
   var root = new Firebase(FIREBASE_URL);
   var currentGameRef = root.child("games").limit(1);
   currentGameRef.once('child_added', function(snapshot) {
-    console.log(snapshot.val());
-    callback(null, game);
+    var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers");
+    playersRef.on('value', function(snapshot) {
+      var playersArray = [];
+      _.each(_.map(snapshot.val(), function(value, key) {
+        value["userId"] = key;
+        return value;
+      }), function(player) {
+        playersArray.push(player);
+      });
+      callback(null, playersArray);
+    });
   });
 }
 
-/*
+
 getFinalState(function(error, game) {
   console.log(game);
 });
-*/
+
 
 //Get your answer for final page on mobile
 function  getMyAnswer(twitterId, callback) {
