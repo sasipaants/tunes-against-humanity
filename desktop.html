@@ -23,10 +23,22 @@
   </head>
   <body style="background-color: black;">
     <div data-role="page" id="lobby" class="container">
-        <div class="tah-title">Tunes Against Humanity</div>
-        <div id="prompt" class="jumbotron"></div>
+        <div id="prompt" class="jumbotron">
+        </div>
         <!-- <div id="imagediv"></div> -->
         <div class="footer-main">
+          <!-- <div class="footer-title">Players...</div> -->
+          <div class="footer-players">
+            <div class="footer-title">Players...</div>
+            <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+             <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+          </div>
           <button id="start" >Start</button>
         </div>
         
@@ -107,7 +119,9 @@
         });
         */
         var prompt = snapshot.val().questions.question1.text;
-        $('#prompt').append('<p class="text">' + prompt + '</p>');
+        $('#prompt')
+          .append('<p class="text">' + prompt + '</p>')
+          .append("<div class='footer-card-main'><img class='logo' src='image/tah-logo.png'/><div class='tah-title'>Tunes Against Humanity</div></div>");
         $('html').trigger('create');
     }
 
