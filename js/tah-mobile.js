@@ -74,7 +74,7 @@ function voteOnUserAPI(twitterId, votedUserId, votedUserImage, votedUserName) {
 function voteOnUserCallback(error, data) {
 	console.log("Vote Error: " + JSON.stringify(error));
 	console.log("Vote Response: " + JSON.stringify(data));
-	console.log("Result is " + data);
+	console.log("Result is " +JSON.stringify(data));
 	var answerDiv = $('#result');
 	var resultHTML;
 	if (data) {
@@ -91,6 +91,7 @@ function voteOnUserCallback(error, data) {
 	cardDiv.append(imgDiv).append(nameDiv);
 	resultHTML.append(cardDiv);
 	answerDiv.append(resultHTML);
+	getMyAnswerAPI(loggedInUser.id);
 }
 
 function getMyAnswerAPI(twitterId) {
@@ -102,7 +103,7 @@ function getMyAnswerCallback(error, data) {
 	console.log("My Answer Response: " + JSON.stringify(data));	
 
 
-	getMyAnswerAPI(loggedInUser.id);
+	
 	$.mobile.changePage( '#answer', { transition: 'slide'} );
 
 	// var answerDiv = $("#answer-content");

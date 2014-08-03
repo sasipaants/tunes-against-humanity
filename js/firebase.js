@@ -199,9 +199,9 @@ function startGuessing() {
     var root = new Firebase(FIREBASE_URL);
     var currentGameRef = root.child("games").limit(1);
     var num_song_choices = 0;
-    var MAX_PLAYERS = 1;
+    var MAX_PLAYERS = 4;
     currentGameRef.once('child_added', function(snapshot) {
-      var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
+      var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
 
       // var playerChoicesRef = newGame.child('questions').child('playerChoices');
       playersRef.on('child_added', function (snapshot) {
@@ -226,7 +226,7 @@ function waitForNextRound() {
 
     var currentGameRef = root.child("games").limit(1);
     currentGameRef.on('child_added', function(snapshot) {
-        if(snapshot.child('players').numChildren() < 1 ) {
+        if(snapshot.child('players').numChildren() < 4 ) {
             //console.log("numplayers="+snapshot.child('players').numChildren());
             console.log("Next round starting.");
 //            window.location = 'index.html';
