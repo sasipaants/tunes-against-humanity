@@ -16,7 +16,8 @@
         } else if (user) {
             if (isNewUser) {
                 // user authenticated with Firebase
-                myFirebaseRef.set(user)
+                id = user.id;
+                myFirebaseRef.child(user.uid).set(user);
             }
         } else {
             // user is logged out
@@ -26,7 +27,7 @@
         $("#login").click( function()
            {
              auth.login('twitter');
-             $('#login').hide()
+             $('#login').hide();
            }
         );
     });
