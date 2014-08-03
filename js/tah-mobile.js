@@ -43,7 +43,7 @@ function getPlayersCallback(error, data) {
 
 	for ( var i = 0; i < data.length; i++ ) {
 		console.log("Getting data " + i );
-		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI("+loggedInUser.id+",\""+data[i].id+"\",\""+data[i].image+"\",\""+data[i].name+"\")'></div>");
+		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI(\""+loggedInUser.id+"\",\""+data[i].id+"\",\""+data[i].image+"\",\""+data[i].name+"\")'></div>");
 		var imgDiv = $("<img src='"+data[i].image.replace("_normal", "")+"' class='user-thumbnail'/>");
 		var nameDiv = $("<div class='user-name'>"+data[i].name.split(' ')[0]+"</div>");
 		cardDiv.append(imgDiv).append(nameDiv);
@@ -82,16 +82,15 @@ function voteOnUserCallback(error, data) {
 	} else {
 		resultHTML = $('<div class="correct">Wrong!</div>');
 	}
+
 	resultHTML.append('<div class="myanswer">Your answer was...</div>');
+
 	var cardDiv = $('<div class="card card-answer" id="answer-content"></div>');
-	var imgDiv =  $("<img src='"+ votedUserImage +"' class='user-thumbnail'/>");
-	var nameDiv = $("<div class='user-name'>"+ votedUserName +"</div>");
+	var imgDiv =  $("<img src='"+ data.image.replace("_normal", "") +"' class='user-thumbnail'/>");
+	var nameDiv = $("<div class='user-name'>"+ data.name.split(' ')[0] +"</div>");
 	cardDiv.append(imgDiv).append(nameDiv);
 	resultHTML.append(cardDiv);
 	answerDiv.append(resultHTML);
-
-	getMyAnswerAPI(loggedInUser.id);
-	$.mobile.changePage( '#answer', { transition: 'slide'} );
 }
 
 function getMyAnswerAPI(twitterId) {
@@ -101,6 +100,11 @@ function getMyAnswerAPI(twitterId) {
 function getMyAnswerCallback(error, data) {
 	console.log("My Answer Error: " + JSON.stringify(error));
 	console.log("My Answer Response: " + JSON.stringify(data));	
+
+
+	getMyAnswerAPI(loggedInUser.id);
+	$.mobile.changePage( '#answer', { transition: 'slide'} );
+
 	// var answerDiv = $("#answer-content");
 	// var imgDiv = $("<img src='"+data.image.replace("_normal", "")+"' class='user-thumbnail'>");
 	// var nameDiv = $("<div class='user-name'>"+data.name.split(' ')[0]+"</div>");

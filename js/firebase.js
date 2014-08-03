@@ -201,7 +201,7 @@ function startGuessing() {
     var num_song_choices = 0;
     var MAX_PLAYERS = 1;
     currentGameRef.once('child_added', function(snapshot) {
-      var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
+      var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
 
       // var playerChoicesRef = newGame.child('questions').child('playerChoices');
       playersRef.on('child_added', function (snapshot) {
