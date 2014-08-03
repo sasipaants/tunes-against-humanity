@@ -81,22 +81,38 @@
         <div data-role="content">
         	<ul id="list-music">
         		<li class="list-music-item">
-                    <div class="controls"><a href="#" class="ui-btn ui-btn-inline">&#9654;</a>
-                    <a href="#" class="ui-btn ui-btn-inline">&#8214;</a></div>
+                    <div class="controls"><a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
+                    <a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#8214;</a></div>
         			<div class="song-title">
-        				CRAZY STUPID LOVE
+                        Turn Down For What
         			</div>
         			​<div class="song-artist">
-        				CHERYL COLE FT TINIE TEMPAH
+                        Lil Jon
     				</div>
-                    <div class="controls"><a href="#" class="ui-btn ui-btn-inline">&#9654;</a>
-                    <a href="#" class="ui-btn ui-btn-inline">&#8214;</a></div>
+                    <div class="controls"><a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#9654;</a>
+                    <a href="#" onclick="Bop.playSong('Lil Jon', 'Turn Down For What');" class="ui-btn ui-btn-inline">&#8214;</a></div>
         		</li>
         		<li class="list-music-item">
-        			<div class="song-title">CRAZY STUPID LOVE 13adfasdf</div>
-        			​<div class="song-artist">CHERYL COLE FT TINIE TEMPAH</div>
+        			<div class="song-title">Turn Down For What</div>
+        			​<div class="song-artist">Lil Jon</div>
         		</li>
     		</ul>
+
+            <div class="bop-player" data-bop-container data-width="100%">
+                <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
+            </div>
+            <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
+            <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
+            <script async="true" src="http://assets.bop.fm/embed.js"></script>
+            <script>
+                window._bopPlayerReady = function(data){
+                    Bop.on('songStart', function(data){
+                        //skip 11 seconds
+                        Bop.seekRelative(11);
+                    });
+                }
+            </script>
+
         </div>
     </div>
 
