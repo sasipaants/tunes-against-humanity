@@ -58,11 +58,6 @@
                }
             );
         });
-
-        function guessing() {
-            $.mobile.changePage("#guess");
-        }
-	    //alert("test done");
   	</script>
 </head>
 <body>
@@ -133,7 +128,7 @@
 
     			<!-- <img class="logo" src="image/tah-logo.png"/> -->
     			<h3> Please wait for game to start... </h3>
-    			<button id="btn-play" style="width:150px;" disabled="true" onclick="getPlayersAPI();">Play!</button>
+    			<button id="btn-play" style="width:150px;" disabled="false" onclick="getPlayersAPI();">Play!</button>
     		</div>
 
         </div>
@@ -162,10 +157,12 @@
             <h1>Tunes Against Humanity</h1>
         </div>
         <div data-role="content" class="page-content">
+            <div id="result"></div>
+<!-- 
          	<div class="correct">Correct!</div>
          	<div class="myanswer">Your answer was...</div>
          	<div class="card card-answer" id="answer-content">
- 	    		<!-- <img src="image/user.jpg" class="user-thumbnail">
+ 	    		<img src="image/user.jpg" class="user-thumbnail">
  	    		<div class="user-name">Sasi</div> -->
  	    	</div>
         </div>
