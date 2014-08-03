@@ -127,7 +127,7 @@ h1 {
 	color: black;
 	font-size: 20px;
 	text-align: center;
-	font-weight: bold;
+	font-weight: normal;
 	padding: 10px;
 	text-shadow: 0 0px 0 #000;
 }
@@ -135,7 +135,7 @@ h1 {
 .user-thumbnail {
 	width: 100px;
 	border-radius: 50px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	text-align: center;
 	margin-left: 23px;
 }
