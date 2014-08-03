@@ -3,6 +3,10 @@ h1 {
 	margin: 0px;
 }
 
+.controls {
+	float: right;
+}
+
 .bop-player {
     padding: 20px;
     background: #EEE;
