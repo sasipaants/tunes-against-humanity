@@ -23,17 +23,42 @@
   </head>
   <body style="background-color: black;">
     <div data-role="page" id="lobby" class="container">
-        <div class="tah-title">Tunes Against Humanity</div>
-        <div id="prompt" class="jumbotron"></div>
+        <div id="prompt" class="jumbotron">
+        </div>
         <!-- <div id="imagediv"></div> -->
         <div class="footer-main">
+          <!-- <div class="footer-title">Players...</div> -->
+          <div class="footer-players">
+            <div class="footer-title">Players...</div>
+            <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+             <div class="card card-option card-footer">
+              <img src="image/user.jpg" class="user-thumbnail">
+              <div class="user-name">Sasi</div>
+            </div>
+          </div>
           <button id="start" >Start</button>
         </div>
         
     </div>
     <div data-role="page" id="music">
-        <div class="bop-player" data-bop-container data-width="100%">
-            This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.
+        <div id="guessingprompt" class="jumbotron">
+        </div>
+        <div class="footer-main">
+            <!-- <div class="footer-title">Players...</div> -->
+            <div class="footer-players">
+                <div class="footer-title">Players...</div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+                <div class="card card-option card-footer">
+                    <img src="image/user.jpg" class="user-thumbnail">
+                    <div class="user-name">Sasi</div>
+                </div>
+            </div>
         </div>
         <!--<button onclick="Bop.playSong('lil jon', 'turn down for what');">Play/Pause</button>-->
         <!-- BOP Javascript file. All of the above won't happen unless you include this on your page -->
@@ -54,6 +79,11 @@
             }
         </script>
     </div>
+    <div data-role="page" id="hiddden">
+        <div class="bop-player" data-bop-container data-width="100%">
+            <!--This is the player container. any html in here will be replaced. Style however you like. The element style be set to "display: block;" automatically when the player is loaded, so do not set any inline styles here otherwise they will be overridden.-->
+        </div>
+    </div>
 
   <script type="text/javascript">
     var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
@@ -65,7 +95,7 @@
       "questions": {
         "question1": {
           "text": "What song does Paul Graham listen to in the shower"
-        } 
+        }
       }
     };
 
@@ -97,7 +127,9 @@
         });
         */
         var prompt = snapshot.val().questions.question1.text;
-        $('#prompt').append('<p class="text">' + prompt + '</p>');
+        $('#prompt')
+          .append('<p class="text">' + prompt + '</p>')
+          .append("<div class='footer-card-main'><img class='logo' src='image/tah-logo.png'/><div class='tah-title'>Tunes Against Humanity</div></div>");
         $('html').trigger('create');
     }
 

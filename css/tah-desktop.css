@@ -2,11 +2,27 @@ body {
 	background-color: black;
 }
 
+.card-footer {
+	width: 122px;
+}
+
+.footer-card-main {
+	position: absolute;
+	bottom: 20;
+	width: 100%;
+}
+
+.footer-title {
+	color: white;
+	font-size: 25px;
+}
+
 .tah-title {
 	padding-top: 10px;
-	color: white;
-	font-size: 40px;
-	padding-bottom: 20px;
+	font-size: 20px;
+	bottom: 0;
+	position: absolute;
+	padding-left: 55px;
 }
 
 #start {
