@@ -132,11 +132,12 @@
     var prompt;
     var num_song_choices = 0;
     var num_players = 0;
-    var MAX_PLAYERS = 4;
+    var MAX_PLAYERS = 1;
 
-    getPrompt(getPromptCallback);
+    
 
     function getPromptCallback(error, data) {
+        console.log("In getPromptCallback");
         var data = {
           "questions": {
             "question1": {
@@ -163,6 +164,7 @@
 
         var playerChoicesRef = newGame.child('questions').child('playerChoices');
         playerChoicesRef.on('child_added', function (snapshot) {
+            console.log("Number of players Joined the game " + num_song_choices);
             user = snapshot.val();
             num_song_choices++;
             if (num_song_choices == MAX_PLAYERS) {
@@ -177,6 +179,7 @@
         playersRef.on('child_added', displayUsers);
     }
     
+    getPrompt(getPromptCallback);
 
     
 

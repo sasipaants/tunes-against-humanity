@@ -11,8 +11,11 @@ function getPrompt(callback) {
       _.each(snapshot.val(), function(song) {
         songsArray.push(song);
       });
+      console.log("Getting prompt " + JSON.stringify(songsArray));
       callback(null, _.sample(songsArray, 1));
     }, function (errorObject) {
+      console.log("Getting prompt error " + JSON.stringify(errorObject));
+
       callback(errorObject.code);
   });
 }
@@ -196,7 +199,7 @@ function startGuessing() {
     var root = new Firebase(FIREBASE_URL);
     var currentGameRef = root.child("games").limit(1);
     var num_song_choices = 0;
-    var MAX_PLAYERS = 4;
+    var MAX_PLAYERS = 1;
     currentGameRef.once('child_added', function(snapshot) {
       var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
 
@@ -223,7 +226,7 @@ function waitForNextRound() {
 
     var currentGameRef = root.child("games").limit(1);
     currentGameRef.on('child_added', function(snapshot) {
-        if(snapshot.child('players').numChildren() < 4 ) {
+        if(snapshot.child('players').numChildren() < 1 ) {
             //console.log("numplayers="+snapshot.child('players').numChildren());
             console.log("Next round starting.");
 //            window.location = 'index.html';
