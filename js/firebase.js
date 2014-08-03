@@ -2,41 +2,6 @@ var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
 //Firebase Game Ref
 var gamesRef = new Firebase(FIREBASE_URL + '/games');
 var songsRef = new Firebase(FIREBASE_URL + '/songs').limit(10);
-var playersRef = new Firebase(FIREBASE_URL + '/users');
-
-function initDesktop(callback) {
-  var game = {
-    prompts: [
-      {
-        id: "1",
-        text: "What song does Paul Graham sing in the shower?"
-      }
-    ],
-    numberOfPlayers: 4,
-    answersCount: 0,
-    players: [
-      //maybe hard code players here
-    ]
-  };
-
-  gamesRef.push(game, function(errorObject) {
-    if (errorObject) {
-      callback(errorObject.code);
-    }
-    else {
-      var currentGameRef = new Firebase(FIREBASE_URL + '/games').limit(1);
-      currentGameRef.on('value', function(snapshot) {
-        callback(null, snapshot.val());
-      }, function(errorObject) {
-        callback(errorObject.code);
-      });
-    }
-  });
-}
-
-function initMobile(callback) {
-
-}
 
 //Get Random 10 songs 
 function getSongs(callback) {
@@ -53,10 +18,18 @@ function getSongs(callback) {
 
 //Get List of Players
 function getPlayers(callback) {
-  playersRef.on('value', function(snapshot) {
-    callback(null, snapshot.val());
-  }, function(errorObject) {
-    callback(errorObject.code);
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
+    playersRef.on('value', function(snapshot) {
+      var playersArray = [];
+      _.each(snapshot.val(), function(player) {
+        playersArray.push(player);
+      });
+      callback(null, playersArray);
+    });
   });
 }
 
@@ -112,7 +85,23 @@ function getSongToPlay(callback) {
 
 
 //who picked the song, who was right, and who was wrong
+function getFinalState(callback) {
+  
+  var FIREBASE_URL = "https://vivid-fire-183.firebaseio.com/";
+  var root = new Firebase(FIREBASE_URL);
+  var currentGameRef = root.child("games").limit(1);
+  currentGameRef.once('child_added', function(snapshot) {
+    console.log(snapshot.val());
+    var game = currentGameRef.child("/games").child(snapshot.name());
+    callback(null, game);
+  });
+}
 
+/*
+getFinalState(function(error, game) {
+  console.log(game);
+});
+*/
 //Get correct answer for prompt
 
 //Get game over -  is number of answers == number of players
