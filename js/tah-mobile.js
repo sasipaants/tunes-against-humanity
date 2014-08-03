@@ -26,6 +26,7 @@ function getSongsCallback(error, data) {
 
 
 	}
+	$.mobile.changePage("#prompt");
 	
 // <li class="list-music-item">
 // 	<div class="song-title"> Turn Down For What</div>
@@ -49,7 +50,7 @@ function getPlayersCallback(error, data) {
 
 	for ( var i = 0; i < data.length; i++ ) {
 		console.log("Getting data " + i );
-		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI(loggedInUser.id,\""+data[i].id+"\")'></div>");
+		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI("+loggedInUser.id+",\""+data[i].id+"\")'></div>");
 		var imgDiv = $("<img src='"+data[i].image.replace("_normal", "")+"' class='user-thumbnail'/>");
 		var nameDiv = $("<div class='user-name'>"+data[i].name.split(' ')[0]+"</div>");
 		cardDiv.append(imgDiv).append(nameDiv);

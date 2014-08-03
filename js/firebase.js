@@ -27,6 +27,7 @@ function getPlayers(callback) {
       var playersArray = [];
       _.each(snapshot.val(), function(player) {
         playersArray.push(player);
+        // callback(null, playersArray);
       });
       callback(null, playersArray);
     });
@@ -47,7 +48,7 @@ function submitSong(userId, song, artist, callback) {
   currentGameRef.once('child_added', function(snapshot) {
     var questionsRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerChoices");
     questionsRef.child(userId).set(data, function(error) {
-      callback(error, questionsRef);
+      callback(error, data);
     });
   }); 
 }
@@ -60,7 +61,7 @@ function submitVote(userId, votedUserId, callback) {
   currentGameRef.once('child_added', function(snapshot) {
     var answersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/questions/question1/playerAnswers");
     answersRef.child(userId).set(votedUserId, function(error) {
-      callback(error, answersRef);
+      callback(error, votedUserId);
     });
   }); 
 }

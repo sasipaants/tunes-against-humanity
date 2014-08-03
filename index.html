@@ -37,12 +37,14 @@
                     var playersRef = new Firebase(FIREBASE_URL + "games/" + snapshot.name() + "/players");
                     playersRef.child(user.id).set({
                         "image": user.thirdPartyUserData.profile_image_url_https,
-                        "name": user.displayName
+                        "name": user.displayName,
+                        "id": user.id
                     });
                 });
                 loggedInUser = user; //global var to save user obj
                 console.log("Logged In User: " + user);
-                $.mobile.changePage("#prompt");
+                getSongsAPI();
+                // $.mobile.changePage("#prompt");
 	        } else {
 	            // user is logged out
 	        }
