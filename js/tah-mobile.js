@@ -49,7 +49,7 @@ function getPlayersCallback(error, data) {
 
 	for ( var i = 0; i < data.length; i++ ) {
 		console.log("Getting data " + i );
-		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI(loggedInUser.id,\""+data[].id+"\")'>"+data[loggedInUser.uid].displayName+"</div>");
+		var cardDiv = $("<div class='card card-option card-option-vote' onclick='voteOnUserAPI(loggedInUser.id,\""+data[loggedInUser.uid].id+"\")'>"+data[loggedInUser.uid].displayName+"</div>");
 		var imgDiv = $("<img src='"+data[loggedInUser.uid].image+"' class='user-thumbnail'/>");
 		var nameDiv = $("<div class='user-name'>"+data[loggedInUser.uid].displayName+"</div>");
 		cardDiv.append(imgDiv).append(nameDiv);
